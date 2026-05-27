@@ -29,6 +29,6 @@ $$\dim_H(\Delta'(E_m)) \leq \frac{m - 1 + \log_{10} 2}{m},$$
 and the construction extends to $\mathbb{R}^d$ via $E_m^{(d)} = A^d$.
 
 ## Files
-
-- `main.pdf` — the compiled thesis
+- `Thesis_HazemAjlan.pdf` — the thesis
+- `main.tex` — LaTeX source
 - `Bibliography.bib` — references
