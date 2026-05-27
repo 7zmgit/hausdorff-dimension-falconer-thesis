@@ -1,0 +1,2168 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{amsfonts}
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pst-all}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{appendix}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{lipsum}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{tikz}
+
+
+
+\geometry{left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\setstretch{1.1}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Spring 2025}
+\lhead{Senior Thesis}
+\rfoot{Page \thepage}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=magenta,
+    urlcolor=blue
+}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{remark}{Remark}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Spring 2025}
+\lhead{Senior Thesis}
+\rfoot{Page \thepage}
+\usepackage{sectsty}
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\setstretch{1.1}
+
+\geometry{left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{appendix}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{lipsum}
+
+\def\mytitle{On the Hausdorff Dimension and the Falconer’s Distance Conjecture}
+\def\myname{Hazem Ajlan}
+\def\mydegree{Bachelor of Science}
+\def\branch{Mathematics}
+\def\mysupervisor{Dr. Eslam Badr}
+\def\myinstitution{The American University in Cairo}
+\def\mydepartment{Department of Mathematics and Actuarial Science}
+\def\mydegreedate{Summer 2025}
+\def\myrollno{900194136}
+
+
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+
+\begin{document}
+\pagenumbering{roman}
+\setlength{\parskip}{0pt}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+
+
+
+\begin{titlepage}
+    \centering
+
+
+    \includegraphics[width=3.5cm]{images.png}\\[1cm]
+
+    {\Large \textbf{\myinstitution}}\\[0.5cm]
+    {\large \mydepartment}\\[2.5cm]
+
+{\Large \textbf{On the Hausdorff Dimension and the \\[0.3em]
+Falconer’s Distance Conjecture}}\\[1.5cm]
+
+    \textbf{Student:} \myname\\
+    \textbf{ID:} \myrollno\\[1cm]
+    \textbf{Supervisor:} \mysupervisor\\[3cm]
+
+    A thesis submitted in partial fulfillment of the requirements for the degree of\\
+    \mydegree\ in \branch\\[2cm]
+
+    \textbf{\mydegreedate}
+\end{titlepage}
+
+
+\chapter*{Candidate’s Declaration}
+\addcontentsline{toc}{chapter}{Candidate’s Declaration}
+I declare that this thesis is my own work and has not been submitted in any form for another degree or diploma at any university or other institution of tertiary education.
+
+
+\chapter*{Acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+
+I would like to express my deepest gratitude to my supervisor, Dr. Eslam Badr, for his continuous support and patience throughout this thesis. Although mathematical analysis is not among his research interests, he was always willing to delve deeply with me into the technical details, and he consistently offered clear and timely guidance whenever I encountered difficulties in a proof.
+
+I am very thankful to Dr. Daoud Siniora, one of the best teachers I have ever had. He has always been generous with his mathematical advice since I became a mathematics major. I am especially grateful to Dr. Wafik Lotfallah and Dr. Hany El-Hosseiny; their high academic standards pushed me to work harder and understand mathematics, particularly mathematical analysis, at a deeper level.
+
+Finally, I am especially grateful to my parents for their unwavering love and support throughout my years at university.
+
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+We study the Hausdorff dimension and energy integrals, with applications to Falconer's distance conjecture. After introducing Hausdorff measure and computing the dimension of the generalized Cantor set, we prove Frostman's Lemma and establish the equivalence between the Hausdorff dimension of a set and the finiteness of energy integrals on it. Using Fourier analysis, we derive the Fourier representation of the $s$-energy and present Marstrand's projection theorem. We then study Falconer's conjecture, which asserts that if $\dim_H(A) > d/2$, then the distance set $\Delta(A)$ has positive Lebesgue measure. Our main contribution is constructing, for each integer $m \geq 3$, a compact set $E_m \subset \mathbb{R}^2$ with $\dim_H(E_m) = 2(m-1)/m$ and $\mathcal{L}^1(\Delta'(E_m)) = 0$, where $\Delta'$ denotes the distance set under the supremum norm. Since $\dim_H(E_m) \to 2$ as $m \to \infty$, this shows that the $L^\infty$ analogue of Falconer's conjecture fails not only at its critical threshold $d/2 = 1$, but for sets of Hausdorff dimension arbitrarily close to the ambient dimension $2$. Finally, we briefly survey recent progress on the Euclidean conjecture via weighted Fourier restriction estimates.
+
+
+\renewcommand{\thepage}{\arabic{page}}
+\tableofcontents
+
+
+\clearpage
+\pagenumbering{arabic}
+\justifying
+
+\chapter{Measure-Theoretic Preliminaries}
+This chapter presents selected core concepts from measure theory that will be used throughout the thesis. As the topic assumes basic familiarity with measure-theoretic notions, the main purpose of this chapter is to establish notation and recall key definitions for clarity in later chapters. \\
+
+If $X$ is a topological space, we denote by $C(X)$ the space of all continuous complex-valued functions defined on $X$.
+\begin{definition} [\textbf{Support of Function}]
+If \( X \) is a topological space and \( f \in C(X) \), the \textit{support} of \( f \), denoted by \( \operatorname{spt}(f) \), is the smallest closed set outside of which \( f \) vanishes, that is, the closure of \( \{x : f(x) \neq 0\} \). If \( \operatorname{spt}(f) \) is compact, we say that \( f \) is \textit{compactly supported}.
+\end{definition}
+
+\begin{remark}
+From the definition of support of a function, we deduce that the support of a measure $\mu$ on $X$ is the smallest closed set $F$ satisfying $\mu(X \setminus F) = 0$.
+\end{remark}
+
+The space of compactly supported continuous functions on \( X \) is denoted by
+\[
+C_c(X) := \{ f \in C(X) : \operatorname{spt}(f) \text{ is compact} \}.
+\]
+
+A related class of functions is \( C_0(X) \), consisting of functions $f \in C(X)$ that \textit{vanish at infinity}, i.e., for every $\varepsilon > 0$, the set
+\( \{ x \in X : |f(x)| \geq \varepsilon \} \) is compact.
+
+Note that \(C_c(X) \subset C_0(X) \subset \mathcal{BC}(X)\), where $\mathcal{BC}(X)$ is the space of bounded continuous functions on $X$. The first inclusion is easy to check, and the second follows since for \( f \in C_0(X) \), the image of the set \( \{ x : |f(x)| \geq \varepsilon \} \) is compact, and \( |f| < \varepsilon \) on its complement. \label{BC}
+
+Let $U \subset \mathbb{R}^d$ be any open set. For $k \in \mathbb{N}^*$, the space $C^k(U)$ consists of all $k$ times continuously differentiable functions on $U$, and the space $C^\infty(U)$ consists of all infinitely differentiable functions on $U$.
+
+\begin{definition}[\textbf{Schwartz Space}] \label{def:schwartz}
+The \textit{Schwartz space} \( \mathcal{S}(\mathbb{R}^d) \) is the set of all functions \( f \in C^\infty(\mathbb{R}^d) \) such that for every pair of multi-indices \( \alpha, \beta \in \mathbb{N}_0^d \), the seminorm
+\[
+\|f\|_{\alpha,\beta} := \sup_{x \in \mathbb{R}^d} |x^\alpha \, \partial^\beta f(x)|
+\]
+is finite. That is,
+\[
+\mathcal{S}(\mathbb{R}^d) := \left\{ f \in C^\infty(\mathbb{R}^d) \,\middle|\, \|f\|_{\alpha,\beta} < \infty \text{ for all } \alpha, \beta \in \mathbb{N}_0^d \right\}.
+\]
+
+Here, we use the multi-index notation:
+\[
+x^\alpha := x_1^{\alpha_1} x_2^{\alpha_2} \cdots x_d^{\alpha_d}, \quad \partial^\beta := \partial_{x_1}^{\beta_1} \partial_{x_2}^{\beta_2} \cdots \partial_{x_d}^{\beta_d}.
+\]
+
+In other words, \( \mathcal{S}(\mathbb{R}^d) \) consists of all smooth functions on \( \mathbb{R}^d \) whose derivatives of all orders decay faster than any polynomial grows. It is a Fréchet space, i.e., a complete Hausdorff topological vector space whose topology is defined by the countable family of seminorms \( \| \cdot \|_{\alpha, \beta} \). The Shwartz space also satisfies
+\[
+\mathcal{S}(\mathbb{R}^d) \subset L^p(\mathbb{R}^d), \quad \text{for all } 1 \le p \le \infty.
+\]
+
+For more on the above function spaces, check sections 4.5 and 8.1 of \cite{folland1999real}.
+\end{definition}
+
+\begin{definition}[\textbf{Locally Integrability}]
+Let \( \Omega \subset \mathbb{R}^d \) be an open set, and let \\ \( f : \Omega \to \mathbb{C} \) be a Lebesgue measurable function. Then, \( f \) is \emph{locally integrable} on \( \Omega \) if
+\[
+\int_K |f(x)| \, dx < +\infty
+\]
+for every compact set \( K \subset \Omega \). That is, the restriction of \( f \) to any compact subset of \( \Omega \) belongs to \( L^1(\mathbb{R}^d) \).
+
+The space of all such functions is denoted by \( L^1_{\mathrm{loc}}(\Omega) \), and is defined as
+\[
+L^1_{\mathrm{loc}}(\Omega) := \left\{ f : \Omega \to \mathbb{C} \ \text{measurable} \ :\ f|_K \in L^1(K) \ \text{for all compact } K \subset \Omega \right\},
+\]
+where \( f|_K \) denotes the restriction of \( f \) to the set \( K \).
+\end{definition}
+
+\begin{remark}
+It is easy to check that \( L^1(\Omega) \subset L^1_{\mathrm{loc}}(\Omega) \). However, the reverse inclusion does not hold in general. Indeed, let \( f : (0,1) \to \mathbb{R} \) be given by $f(x) = \frac{1}{x}$. Given a compact set \( [\varepsilon,1] \subset (0,1) \), we have
+\[
+\int_\varepsilon^1 \frac{1}{x} \, dx = \log\left(\frac{1}{\varepsilon}\right) < \infty.
+\]
+But
+\[
+\int_0^1 \frac{1}{x} \, dx = \infty.
+\]
+Hence, \( f \) is locally integrable but not integrable on \( (0,1) \).
+\end{remark}
+
+
+\begin{definition} [\textbf{Push-Forward Measure}] \label{pushforward}
+Let \( (X, \mathcal{M}) \) and \( (Y, \mathcal{N}) \) be measurable spaces, let \( f : X \to Y \) be a measurable function, and let \( \mu : \mathcal{M} \to [0, \infty] \) be a measure on \( X \). The \textit{pushforward} of \( \mu \) by \( f \) is the measure \( f_*\mu : \mathcal{N} \to [0, \infty] \) defined by
+\[
+f_*\mu(B) := \mu(f^{-1}(B)), \quad \text{for all } B \in \mathcal{N}.
+\]
+It is easy to check that the function $f_*\mu$ is indeed a measure.
+\end{definition}
+
+\begin{theorem}[\textbf{Change of Variables for Pushforward Measures}] \label{lem:changeofvariable-pushforward}
+Let \( f : X \to Y \) and \( f_* \mu \) be as in Definition~\ref{pushforward}, and let \( g : Y \to [0, \infty] \) be a measurable function. Then
+\[
+\int_Y g(y) \, d(f_* \mu)(y) = \int_X g(f(x)) \, d\mu(x).
+\]
+\end{theorem}
+
+\noindent For each $d \in \mathbb{N}^*,$ the \textit{Lebesgue measure} on $\mathbb{R}^d$ will be denoted by $\mathcal{L}^d$.
+
+\begin{theorem}[\textbf{The $d$-Dimensional Lebesgue Integral}] \label{thm2.45}
+Let \( T \in GL(d, \mathbb{R}) \), where \( GL(d, \mathbb{R}) \) denotes the group of invertible \( d \times d \) real matrices.
+\begin{enumerate}
+    \item[(a)] If \( f \) is a Lebesgue measurable function on \( \mathbb{R}^d \), then so is \( f \circ T \). Moreover, if \( f \ge 0 \) or \( f \in L^1(\mathbb{R}^d, \mathcal{L}^d) \), then
+    \[
+    \int_{\mathbb{R}^d} f(x) \, dx = |\det T| \int_{\mathbb{R}^d} f(T(x)) \, dx.
+    \]
+
+    \item[(b)] If \( E \subset \mathbb{R}^d \) is Lebesgue measurable, then \( T(E) \subset \mathbb{R}^d \) is Lebesgue measurable, and
+    \[
+    \mathcal{L}^d(T(E)) = |\det T| \, \mathcal{L}^d(E).
+    \]
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof}
+    See Theorem 2.45 of \cite{folland1999real}.
+\end{proof}
+
+
+On a few occasions, we will need integration in polar coordinates in $\mathbb{R}^d$. Consider the \textbf{unit sphere} \(S^{d-1} = \{x \in \mathbb{R}^d : |x| = 1\} \). If \( x \in \mathbb{R}^d \setminus \{0\} \), the \textbf{polar coordinates} of \( x \) are
+\[
+r = |x| \in (0, \infty), \qquad x' = \frac{x}{|x|} \in S^{d-1}.
+\]
+
+Define the map \( \Phi : \mathbb{R}^d \setminus \{0\} \to (0, \infty) \times S^{d-1} \) by
+\[
+\Phi(x) := (r, x').
+\]
+The map $\Phi$ is a homeomorphism with inverse \( \Phi^{-1}(r, x') = r x' \).  We define a Borel measure \( m_* \) on \( (0, \infty) \times S^{d-1} \) as the pushforward of \( \mathcal{L}^d \) by \( \Phi \):
+\[
+m_*(E) := \mathcal{L}^d(\Phi^{-1}(E)), \quad \text{for all Borel sets } E \subset (0, \infty) \times S^{d-1}.
+\]
+Additionally, define the measure \( \rho \) on \( (0, \infty) \) by
+\[
+\rho(E) := \int_E r^{d-1} \, dr.
+\]
+
+
+\begin{theorem}[\textbf{Change of Variables in Polar Coordinates}] \label{polar}
+\leavevmode
+\begin{itemize}
+    \item [(a)] \textit{There is a unique Borel measure \(\sigma_{d-1} \) on \( S^{d-1} \) such that $$ \mathcal{L}^d \circ \Phi^{-1} = \rho \times \sigma.$$
+    \item [(b)] If $f : \mathbb{R}^d \to \mathbb{R}$ is Borel measurable and \( f \in L^1(\mathbb{R}^d, \mathcal{L}^d) \), then}
+$$
+\int_{\mathbb{R}^d} f(x) \, dx = \int_0^\infty \int_{S^{d-1}} f(r x') r^{d-1} \, d\sigma_{d-1}(x') \, dr.
+$$
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+    See Theorem 2.49 of \cite{folland1999real}.
+\end{proof}
+
+If $a, b \in \mathbb{R}$, we write \( a \lesssim_\alpha b \) to mean that there exists a constant \( C > 0 \), depending only on the parameter(s) \( \alpha \), such that
+\[
+a \leq C b.
+\]
+If the dependence of the implicit constant is clear from context, we may simply write \( a \lesssim b \). Although the subscript \( \alpha \) in \( \lesssim_\alpha \) indicates that the constant may depend on \( \alpha \), it does not necessarily reflect all dependencies.
+
+
+\chapter{Hausdorff Dimension and Measure}
+
+\section{Definition and Basic Properties}
+The Hausdorff measure is a "lower dimensional" measure on $\mathbb{R}^d$; that is, it allows us to measure some "very small" subsets of $\mathbb{R}^d$. It is defined in terms of the diameters of efficient covers. Before studying this measure, let's have some preliminaries. \\
+
+\begin{definition}
+Let \((X, d)\) be a metric space. An outer measure \(\mu^*\) on \(X\) is a \textit{metric outer measure} if whenever $d(A, B) > 0$ for sets $A, B \subset X$ then
+$$\mu^*(A \cup B) = \mu^*(A) + \mu^*(B)$$
+\end{definition}
+
+
+\begin{theorem} \label{thm1}
+If \(\mu^*\) is a metric outer measure on \(X\), then every Borel subset of \(X\) is \(\mu^*\)-measurable.
+\end{theorem}
+
+\begin{proof}
+The Borel $\sigma$-algebra of $X$ is generated by the closed sets in $X$, so given any closed set \(F \subset X\) and any set \(A \subset X\) with \(\mu^*(A) < \infty\), it suffices to show that
+$$\mu^*(A) \geq \mu^*(A \cap F) + \mu^*(A \setminus F).$$
+Set \(B_n = \{x \in A \setminus F : d(x, F) > 1/n\}\). Note that $\{B_n\}_{n \in \mathbb{N}}$ is increasing, and since $F$ is closed, we have $\bigcup_{n=1}^\infty B_n = A \setminus F$, and $d(B_n, F) > 1/n \hspace{0.5em}$ for each $n \in \mathbb{N^*}$. By monotonicity of $\mu^*$, then
+$$\mu^*(A) \geq \mu^*((A \cap F) \cup B_n) = \mu^*(A \cap F) + \mu^*(B_n), \qquad \forall n \in \mathbb{N^*} $$
+Since any outer measure is continuous from below (see Proposition 1.13 of \cite{folland1999real}), then $\lim_{n\to\infty} \mu^*(B_n) = \mu^*( \bigcup_{n=1}^\infty B_n)$, so if we show that $\mu^*(A \setminus F) = \lim_{n\to\infty} \mu^*(B_n)$, the proof will be complete. Let \( C_n := B_{n+1} \setminus B_n \) for each \( n \in \mathbb{N^*} \). Note that $d(C_{n+1}, B_n) \geq \frac{1}{n(n+1)}$, for otherwise we can find $x \in C_{n+1}$ and $y \in B_n$ such that $d(x,y) < \frac{1}{n(n+1)}$, and so
+$$d(y, F) \leq d(x,y)+d(x,F) < \frac{1}{n(n+1)} + \frac{1}{n+1} = \frac{1}{n},$$
+contradicting that $y \in B_n$.
+
+Induct on the sets with odd indices to get $k \in \mathbb{N^*}$:
+\begin{align*}
+\mu^*(B_{2k+1})
+&\geq \mu^*(C_{2k} \cup B_{2k-1}) = \mu^*(C_{2k}) + \mu^*(B_{2k-1}) \\
+&\geq \mu^*(C_{2k}) + \mu^*(C_{2k-2} \cup B_{2k-3}) \\
+&\ \ \vdots \\
+&\geq \sum_{j=1}^k \mu^*(C_{2j}),
+\end{align*}
+and similarly with even indices
+\begin{align*}
+\mu^*(B_{2k})
+&\geq \sum_{j=1}^k \mu^*(C_{2j-1}).
+\end{align*}
+
+Since $\mu^*(B_n) \leq \mu^*(A) < \infty$ for each $n \in \mathbb{N^*}$, then the series
+\[
+\sum_{j=1}^\infty \mu^*(C_{2j}) \quad \text{and} \quad \sum_{j=1}^\infty \mu^*(C_{2j-1})
+\]
+are convergent. The subadditivity of $\mu^*$ guarantees that
+$$ \mu^*(A \setminus F) \leq \mu^*(B_n) + \sum_{j=n+1}^\infty \mu^*(C_j), \qquad \forall n \in \mathbb{N^*}, $$
+and since the last sum vanishes as $n \to \infty$, we have
+\begin{align*}
+\mu^*(A \setminus F)
+&\leq \liminf_{n \to \infty} \mu^*(B_n) + \liminf_{n \to \infty} \sum_{j = n+1}^\infty \mu^*(C_j) \\
+&= \liminf_{n \to \infty} \mu^*(B_n) \\
+&\leq \limsup_{n \to \infty} \mu^*(B_n) \\
+&\leq \mu^*(A \setminus F).
+\end{align*}
+so
+$ \mu^*(A \setminus F)
+\leq \lim_{n\to\infty} \mu^*(B_n)
+\leq \mu^*(A \setminus F) $
+as desired.
+
+\end{proof}
+We are now ready to define the Hausdorff measure on \( \mathbb{R}^d \). Although the definition extends naturally to any metric space, we restrict our attention to \( \mathbb{R}^d \) for the purposes of this thesis.
+\begin{definition}
+Let \( A \subseteq \mathbb{R}^d \) and $0\leq s$. For \( \delta > 0 \), set
+$$
+\mathcal{H}^s_\delta(A) := \inf \left\{ \sum_{j=1}^\infty (\operatorname{diam} C_j)^s : A \subseteq \bigcup_{j=1}^\infty C_j,\ \operatorname{diam}(C_j) \le \delta \hspace{0.5em} \forall j \in \mathbb{N^*} \right\},
+$$
+Then, the \textit{$s$-dimensional Hausdorff outer measure} is defined by
+
+$$\mathcal{H}^s(A) := \lim_{\delta \to 0} \mathcal{H}^s_\delta(A).$$
+\end{definition}
+
+The quantity $\mathcal{H}^s_\delta(A)$ is non-decreasing as $\delta$ decreases, since the infimum is taken over a smaller collection of sums; also, it is possible that $\mathcal{H}^s_\delta(A) = +\infty$.
+
+\begin{proposition}
+The function \( \mathcal{H}^s : \mathcal{P}(\mathbb{R}^d) \to [0,\infty] \) is an outer measure on \( \mathbb{R}^d \).
+\end{proposition}
+
+\begin{proof}
+(i) \textbf{Null empty set.} The empty set admits a trivial cover, so for every \( \delta > 0 \), we have \( \mathcal{H}^s_\delta(\varnothing) = 0 \), hence \( \mathcal{H}^s(\varnothing) = 0 \).
+
+\vspace{1ex}
+\noindent
+(ii) \textbf{Monotonicity.} Let \( A_1 \subseteq A_2 \). For any fixed \( \delta > 0 \), every \( \delta \)-cover of \( A_2 \) is also a \( \delta \)-cover of \( A_1 \), so
+\[
+\mathcal{H}^s_\delta(A_1) \le \mathcal{H}^s_\delta(A_2).
+\]
+Taking \( \delta \to 0 \), we obtain \( \mathcal{H}^s(A_1) \le \mathcal{H}^s(A_2) \).
+
+\vspace{1ex}
+\noindent
+(iii) \textbf{Countable subadditivity.} Let \( \{A_j\}_{j=1}^\infty \subseteq \mathbb{R}^d \), and fix \( \varepsilon > 0 \) and \( \delta > 0 \). For each \( j \), select a \( \delta \)-cover \( \{C_{j,k}\}_{k=1}^\infty \) of \( A_j \) such that
+\[
+\sum_{k=1}^\infty (\operatorname{diam} C_{j,k})^s \le \mathcal{H}^s_\delta(A_j) + \frac{\varepsilon}{2^j}.
+\]
+Then the countable family \( \{C_{j,k}\}_{j,k} \) forms a \( \delta \)-cover of \( \bigcup_{j=1}^\infty A_j \), and thus
+\[
+\mathcal{H}^s_\delta\left( \bigcup_{j=1}^\infty A_j \right) \le \sum_{j=1}^\infty \mathcal{H}^s_\delta(A_j) + \varepsilon.
+\]
+Letting \( \delta \to 0 \), we obtain
+\[
+\mathcal{H}^s\left( \bigcup_{j=1}^\infty A_j \right) \le \sum_{j=1}^\infty \mathcal{H}^s(A_j) + \varepsilon,
+\]
+and since \( \varepsilon > 0 \) was arbitrary, the result follows.
+\end{proof}
+
+More precisely, $H^s$ is a metric outer measure.
+\begin{theorem}[\textbf{Metric Additivity}]
+If $A_1, A_2 \subset \mathbb{R}^d$ with \( d(A_1, A_2) > 0 \), then
+\[
+\mathcal{H}^s(A_1 \cup A_2) = \mathcal{H}^s(A_1) + \mathcal{H}^s(A_2).
+\]
+\end{theorem}
+
+\begin{proof}
+By subadditivity, we have $\mathcal{H}^s(A_1 \cup A_2) \le \mathcal{H}^s(A_1) + \mathcal{H}^s(A_2)$. For the reverse inequality, fix \( 0 < \delta <  \operatorname{dist}(E_1, E_2)  \). Any cover \( \{C_j\} \) of \( E_1 \cup E_2 \) by sets with \( \operatorname{diam}(C_j) \le \delta \) must consist of sets intersecting either \( A_1 \) or \( A_2 \), but not both. Define
+\[
+C_j' := C_j \cap A_1, \qquad C_j'' := C_j \cap A_2.
+\]
+Then, \( \{C_j'\} \) and \( \{C_j''\} \) form disjoint covers of \( A_1 \) and \( A_2 \), respectively, and the diameter of each set in both collection is at most $\delta$. Hence,
+\[
+\sum_{j=1}^\infty (\operatorname{diam} C_j')^s + \sum_{j=1}^\infty (\operatorname{diam} C_j'')^s \le \sum_{j=1}^\infty (\operatorname{diam} C_j)^s.
+\]
+Taking infima over such covers and letting \( \delta \to 0 \) yields
+\[
+\mathcal{H}^s(A_1 \cup A_2) \ge \mathcal{H}^s(A_1) + \mathcal{H}^s(A_2).
+\]
+\end{proof}
+
+By Carathéodory's extension theorem, the restriction of $\mathcal{H}^s$ to the $\sigma$-algebra of Carathéodory-measurable sets is a measure. It is called the \textbf{$s$-dimensional Hausdorff measure}. By Theorem~\ref{thm1}, all Borel subsets of $\mathbb{R}^d$ are
+$\mathcal{H}^s$-measurable.
+
+\begin{theorem}[\textbf{Properties of Hausdorff Measure}]
+\begin{enumerate}[label=\textnormal{(\alph*)}]
+    \item \( \mathcal{H}^0 \) is the counting measure on \( \mathbb{R}^d \).
+    \item \( \mathcal{H}^1 = \mathcal{L}^1 \) on \( \mathbb{R} \).
+    \item For each \( d \in \mathbb{N}^* \), we have \( \gamma_d \mathcal{H}^d \equiv \mathcal{L}^d \), where \( \gamma_d = \frac{\pi^{d/2}}{2^d \Gamma\left( \frac{d}{2} + 1 \right)} \).
+    \item \label{partd} \( \mathcal{H}^s \equiv 0 \) on \( \mathbb{R}^d \) for all \( s > d \).
+    \item \( \mathcal{H}^s(\lambda A) = \lambda^s \mathcal{H}^s(A) \) for all \( \lambda > 0 \) and \( A \subset \mathbb{R}^d \).
+    \item \( \mathcal{H}^s \) is invariant under isometries of \( \mathbb{R}^d \).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}[label=\textnormal{(\alph*)}]
+\item Fix $\delta > 0$. For each $ a \in A \subset \mathbb{R}^d$, we have
+\[
+\mathcal{H}^0_\delta(\{a\}) = \inf \left\{ \sum_{j=1}^\infty (\operatorname{diam} C_j)^0 : \{a\} \subset \bigcup_{j=1}^\infty C_j,\ \operatorname{diam}(C_j) \leq \delta \right\}.
+\]
+Here, we require any sets in the cover to have a positive diameter, to avoid the indeterminate form $0^0$. Knowing this, any cover $\{C_j\}_j$ of $\{a\}$ must include at least one set $C_j \ni a$, so $\operatorname{diam} C_j > 0$. Thus, $\sum_{j=1}^\infty (\operatorname{diam} C_j)^0 \geq 1$, so $\mathcal{H}^0_\delta(\{a\}) \geq 1$, and as $\delta \to 0$, $\mathcal{H}^0(\{a\}) \geq 1$. On the other hand, choose $0 < \varepsilon < \frac{\delta}{2}$ so that $(a-\varepsilon, a+ \varepsilon)$ covers $a$ and has diameter $2\varepsilon<\delta$. Thus, $\mathcal{H}^0_\delta(\{a\}) \leq 1$.
+Since \( \mathcal{H}^0(\{a\}) = 1 \), and by countable additivity,
+\[
+\mathcal{H}^0(A) = \sum_{a \in A} \mathcal{H}^0(\{a\}),
+\]
+which is precisely the counting measure on $\mathbb{R}^d$.
+\item This is the special case $d = 1$ of (c) below, since $\gamma_1 = 1$.
+\item The proof requires more tools that are beyond the scope of this thesis; both (b) and (c) are proved in section 2.2 of~\cite{evans1992measure}.
+\item Let \( s > d \). If $B \subset \mathbb{R}^d$ is a ball, the $\mathcal{H}^s(B) = 0$, and \( \mathbb{R}^d \) can be covered by countably many such balls. Thus, \( \mathcal{H}^s(\mathbb{R}^d) = 0 \), hence \( \mathcal{H}^s \equiv 0 \).
+
+\item If \( \operatorname{diam}(F_j) \mapsto \lambda \operatorname{diam}(F_j) \), then each term in the sum scales by \( \lambda^s \), and the infimum does too.
+
+\item Isometries preserve diameters, so the covering sums used in the definition of \( \mathcal{H}^s \) remain unchanged under isometries.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{hdim}
+Let $A \subset \mathbb{R}^d$. If \(\mathcal{H}^s(A) < \infty\), then \(\mathcal{H}^t(A) = 0\) for all \(t > s\). Conversely, if \(\mathcal{H}^s(A) > 0\), then \(\mathcal{H}^t(A) = \infty\) for all \(t < s\).
+\end{theorem}
+
+\begin{proof}
+Assume \(\mathcal{H}^s(A) < \infty\). Then for every \(\delta > 0\), there exists a covering of \(A\) by sets \(C_j\) of diameter \(< \delta\) with \(\sum_j (\mathrm{diam}\, C_j)^s < \mathcal{H}^s(A) + 1\). For \(t > s\),
+\[
+\sum_{j=1}^\infty (\mathrm{diam}\, C_j)^t \leq \delta^{t-s} \sum_{j=1}^\infty (\mathrm{diam}\, C_j)^s < \delta^{t-s} (\mathcal{H}^s(A) + 1).
+\]
+Taking \(\delta \to 0\), we see \(\mathcal{H}^t(A) = 0\). The second statement follows by contraposition.
+
+\end{proof}
+
+Theorem~\ref{hdim} furnishes a new dimension that measures how efficiently a set $A$ in $\mathbb{R}^d$ can be covered by balls.
+\begin{definition}[\textbf{Hausdorff Dimension}]
+The \textit{Hausdorff dimension} of a set $A \subset \mathbb{R}^d$ is defined by
+\[
+\dim_H(A) = \inf\{s \geq 0: \mathcal{H}^s(A) = 0\}
+\]
+\end{definition}
+
+\begin{lemma}
+Let $A \subset \mathbb{R}^d$. Then:
+\begin{enumerate}
+\item
+\( \dim_H(A) = \inf \{ s \geq 0 : \mathcal{H}^s(A) = 0 \} \) is well-defined.
+\item
+\( \dim_H(A) = \sup \{ s \geq 0 : \mathcal{H}^s(A) = \infty \} \) if the set \( \{ s \geq 0 : \mathcal{H}^s(A) = \infty \} \neq \emptyset \).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+\item Assume \( s > d \). Since \( \mathcal{H}^s = 0 \) by \ref{partd}, then \( \{ s \geq 0 : \mathcal{H}^s(A) = 0 \} \neq \emptyset \), and it is clearly bounded below by 0, so \( \dim_{H}(A) \) is well-defined.
+
+\item Let \( s \geq 0 \) such that \( \mathcal{H}^s(A) = \infty \).
+
+\textbf{Claim 1: } \( s \leq \dim_H(A)) \).
+
+If \( s > \dim_H(A) \), then by definition of \( \dim_H(A) \), there exists \( t > 0 \) such that \( \mathcal{H}^t(A) = 0 \) and \( t < s \). Since \( t < s \) and \( \mathcal{H}^s \) is non-increasing, then \( \mathcal{H}^s(A) \leq \mathcal{H}^t(A) = 0 \). But \( \mathcal{H}^s \) is a measure, so \( \mathcal{H}^s(A) = 0 \), a contradiction.
+
+\textbf{Claim 2: }
+If \( 0 < p < \dim_H(A) \), then \( \mathcal{H}^p(A) = \infty \).
+
+Let \( 0 < \delta < 1 \) and choose a cover \( \{ C_j \}_{j=1}^\infty \) of \( A \) by sets \( C_j \subset \mathbb{R}^d \) such that \( \operatorname{diam}(C_j) \leq \delta \,\, \forall j \in \mathbb{N} \). We have:
+
+\[
+\sum_{j=1}^\infty (\operatorname{diam} C_j)^p =
+\sum_{j=1}^\infty (\operatorname{diam} C_j)^{p - \dim_H(A)} \cdot (\operatorname{diam} C_j)^{\dim_H(A)}
+\]
+
+\[
+\geq \delta^{p - \dim_{\mathcal{H}}(A)} \sum_{j=1}^\infty (\operatorname{diam} C_j)^{\dim_H(A)}.
+\]
+
+Thus,
+\[
+\mathcal{H}^p_\delta(A) \geq \delta^{p - \dim_H(A)} \sum_{j=1}^\infty (\operatorname{diam} C_j)^{\dim_H(A)}.
+\]
+As \( \delta \to 0 \), the RHS \( \to \infty \), so \( \mathcal{H}^p(A) = \infty \).
+
+This shows that
+\[
+\dim_H(A) = \sup \{ s > 0 : \mathcal{H}^s(A) = \infty \}.
+\]
+\end{enumerate}
+\end{proof}
+
+
+\begin{lemma}
+Let \( A \subset \mathbb{R}^d \). If \( 0 < \alpha < \beta \), then
+$\mathcal{H}^\beta(A) \leq \mathcal{H}^\alpha(A).$
+\end{lemma}
+
+\begin{proof}
+Assume $\mathcal{H}^\alpha(A) < \infty.$ Fix \( \delta > 0 \), and note that for any cover \( \{C_j\}_{j=1}^{\infty} \) of \( A \) with \( \operatorname{diam}(C_j) \leq \delta \), we have
+\[
+\sum_{j=1}^\infty (\operatorname{diam} C_j)^\beta
+= \sum_{j=1}^\infty (\operatorname{diam} C_j)^{\beta - \alpha} (\operatorname{diam} C_j)^\alpha
+\leq \delta^{\beta - \alpha} \sum_{j=1}^\infty (\operatorname{diam} C_j)^\alpha,
+\]
+Taking the infimum over all such \( \delta \)-covers of \( A \), we obtain
+\[
+\mathcal{H}^\beta_\delta(A)
+= \inf \left\{ \sum_{j=1}^\infty (\operatorname{diam} C_j)^\beta : A \subseteq \bigcup_j C_j,\ \operatorname{diam}(C_j) \leq \delta \right\}
+\]
+\[
+\leq \inf \left\{ \delta^{\beta - \alpha} \sum_{j=1}^\infty (\operatorname{diam} C_j)^\alpha : A \subseteq \bigcup_j C_j,\ \operatorname{diam}(C_j) \leq \delta \right\}
+= \delta^{\beta - \alpha} \mathcal{H}^\alpha_\delta(A),
+\]
+Taking the limit as \( \delta \to 0 \) gives
+\[
+\mathcal{H}^\beta(A) = \lim_{\delta \to 0} \mathcal{H}^\beta_\delta(A) \leq \lim_{\delta \to 0} \delta^{\beta - \alpha} \mathcal{H}^\alpha_\delta(A) = 0.
+\]
+Hence, \(\mathcal{H}^\beta(A) = 0\).
+\end{proof}
+
+\begin{corollary}[\textbf{Equivalent Characterizations of Hausdorff Dimension}~{\cite{mattila2012fourier}}]
+Let \( A \subset \mathbb{R}^d \). Then:
+\begin{enumerate}
+    \item
+    $\dim_H(A) = \inf \left\{ t \geq 0 : \mathcal{H}^t(A) < \infty \right\}
+    = \inf \left\{ t \geq 0 : \mathcal{H}^t(A) = 0 \right\}.$
+
+
+    \item If the following sets are nonempty, then:
+    \[
+    \dim_H(A) = \sup \left\{ s \geq 0 : \mathcal{H}^s(A) > 0 \right\}
+    = \sup \left\{ s \geq 0 : \mathcal{H}^s(A) = \infty \right\}.
+    \]
+\end{enumerate}
+\end{corollary}
+
+\begin{example}[\textbf{The Generalized Cantor Set}]
+Let \( 0 < \gamma < \frac{1}{2} \), and define the initial interval \( I_{0,1} = [0,1] \). At the first step, remove the open middle interval of length \( 1 - 2\gamma \), leaving two closed intervals:
+\[
+I_{1,1} = [0, \gamma], \quad I_{1,2} = [1 - \gamma, 1].
+\]
+
+At the second step, from each interval \( I_{1,j} \), where $j = 1, 2$, remove the open middle interval of length \( \gamma(1 - 2\gamma) \) centered in \( I_{1,j} \). This produces \( 2^2 \) closed intervals, each of length \( \gamma^2 \).
+
+Proceeding inductively, at the \( k \)th step we obtain \( 2^k \) closed intervals, each of length \( \gamma^k \). Denote these intervals by \( I_{k,1}, \dots, I_{k,2^k} \).
+
+The \emph{generalized Cantor set} is defined as the intersection of all these stages:
+\[
+C(\gamma) = \bigcap_{k=0}^{\infty} \bigcup_{j=1}^{2^k} I_{k,j}.
+\]
+\end{example}
+
+\begin{theorem} \label{generalizedCantor}
+Let \( 0 < \gamma < \frac{1}{2} \). Then,
+\[
+\dim_{H}(C(\gamma)) = \frac{\log 2}{\log(1/\gamma)}.
+\]
+\end{theorem}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.3]{CantorGeneralized.png}
+    \caption{First stages in the construction of the Cantor set $C(\gamma)$. From \cite{Ziemer2012}.}
+    \label{fig:generalizedCantor}
+\end{figure}
+
+\begin{proof}
+Fix $s > 0$. At the \( k \)th stage of the construction, there are \( 2^k \) closed intervals \( I_{k,j} \), each of length \( \gamma^k \). Then,
+\[
+C(\gamma) \subset \bigcup_{j=1}^{2^k} I_{k,j}
+\]
+so the \( s \)-dimensional Hausdorff content with scale \( \gamma^k \) satisfies
+\begin{equation}
+\mathcal{H}_{\gamma^k}^s(C(\gamma)) \leq \sum_{j=1}^{2^k} \operatorname{diam}(I_{k,j})^s = 2^k \gamma^{k s} = (2\gamma^s)^k.
+\label{eq:upper-bound}
+\end{equation}
+
+Now, choose \( s = \frac{\log 2}{\log(1/\gamma)}\).
+Taking the limit as \( k \to \infty \), we have
+\begin{equation}
+\mathcal{H}^s(C(\gamma)) = \lim_{k \to \infty} \mathcal{H}_{\gamma^k}^s(C(\gamma)) \leq 1.
+\label{eq:Hausdorff-upper}
+\end{equation}
+
+Thus, \( \dim_{H}(C(\gamma)) \leq s = \frac{\log 2}{\log(1/\gamma)} \).
+
+To show the reverse inequality, let \( \{J_i\}_{i=1}^\infty \) be any open cover of \( C(\gamma) \). Since \( C(\gamma) \subset [0,1] \) is compact, there exists \( \delta > 0 \) such that every interval \( I_{k,j} \) from a sufficiently large stage \( k \) satisfies \( \ell(I_{k,j}) < \delta \), and each such interval is contained in some \( J_i \) of the cover.
+
+We now claim that
+\begin{equation}
+\sum_{i=1}^\infty \operatorname{diam}(J_i)^s \geq \frac{1}{4},
+\label{eq:lower-boundd}
+\end{equation}
+which would imply \( \mathcal{H}^s(C(\gamma)) \geq \frac{1}{4} > 0 \), and hence
+\[
+\dim_{H}(C(\gamma)) \geq s.
+\]
+
+To prove \eqref{eq:lower-boundd}, we use the following inequality: for any open interval \( I \subset [0,1] \), and for any fixed stage \( m \), the collection \( \{I_{m,i} \subset I\} \) of subintervals from the \( m\)-th step satisfies
+\begin{equation}
+\sum_{I_{m,i} \subset I} \operatorname{diam}(I_{m,i})^s \leq 4 \operatorname{diam}(I)^s.
+\label{eq:local-inequality}
+\end{equation}
+
+To verify \eqref{eq:local-inequality}, assume that \( I \) contains some interval \( I_{m,i} \) from the \( m \)-th stage, and let \( k \) denote the smallest integer such that \( I \) contains some interval \( I_{k,j} \) from the \( k \)th stage. Then \( k \leq m \). By construction of \( C(\gamma) \), at most four intervals from the \( k \)th stage can intersect \( I \), for otherwise \( I \) would contain some interval \( I_{k-1,i} \). Let these four intervals be denoted by \( I_{k,k_n} \), for \( n = 1,2,3,4 \). Then:
+
+\begin{align*}
+4 \operatorname{diam}(I)^s
+&\geq \sum_{n=1}^4 \operatorname{diam}(I_{k,k_n})^s \\
+&= \sum_{n=1}^4 \sum_{I_{m,i} \subset I_{k,k_n}} \operatorname{diam}(I_{m,i})^s \\
+&\geq \sum_{I_{m,i} \subset I} \operatorname{diam}(I_{m,i})^s,
+\end{align*}
+
+which establishes \eqref{eq:local-inequality}.
+Moreover, observe that
+\begin{enumerate}[label=(\roman*)]
+    \item \label{obs:i} For sufficiently large \( k \), every interval \( I_{k,j} \) is contained in some \( J_i \), so
+    \[
+    \bigcup_{j=1}^{2^k} I_{k,j} \subset \bigcup_{i=1}^\infty J_i.
+    \]
+    Hence,
+    \[
+    \sum_i \sum_{I_{k,j} \subset J_i} \operatorname{diam}(I_{k,j})^s \geq \sum_{j=1}^{2^k} \operatorname{diam}(I_{k,j})^s.
+    \]
+
+    \item \label{obs:ii} The choice \( s = \frac{\log 2}{\log(1/\gamma)} \) implies that for any \( p \in \mathbb{N}^* \),
+    \[
+    \sum_{j=1}^{2^p} \operatorname{diam}(I_{p,j})^s = 1.
+    \]
+    Indeed, each interval \( I_{p,j} \) has length \( \gamma^p \), so
+    \[
+    \sum_{j=1}^{2^p} \gamma^{ps} = 2^p \cdot \gamma^{ps} = (2 \gamma^s)^p = 1.
+    \]
+\end{enumerate}
+
+It follows that
+\begin{align*}
+4 \sum_i \operatorname{diam}(J_i)^s
+&\geq \sum_i \sum_{I_{k,j} \subset J_i} \operatorname{diam}(I_{k,j})^s \quad \text{by \eqref{eq:local-inequality}} \\
+&\geq \sum_{j=1}^{2^k} \operatorname{diam}(I_{k,j})^s = 1, \quad \text{by observations \ref{obs:i} and \ref{obs:ii}},
+\end{align*}
+which establishes \eqref{eq:lower-boundd}. Hence
+\begin{equation}
+\mathcal{H}^s(C(\gamma)) \geq \frac{1}{4}.
+\label{eq:Hausdorff-lower}
+\end{equation}
+
+Combining \eqref{eq:Hausdorff-upper} and \eqref{eq:Hausdorff-lower}, we conclude:
+\[
+0 < \mathcal{H}^s(C(\gamma)) < \infty,
+\]
+and therefore
+\[
+\dim_{H}(C(\gamma)) = s = \frac{\log 2}{\log(1/\gamma)}.
+\]
+\end{proof}
+
+\begin{remark}
+For $s \in (0,1),$ there is $\gamma \in (0,\frac{1}{2})$ such that $\gamma = 2^{-1/s} \iff s = \frac{\log 2}{\log(1/\gamma)}$, and according to theorem \ref{generalizedCantor}, we have $\dim_{H}(C(\gamma)) = s$.
+\end{remark}
+
+
+\section{Weak Convergence and Frostman's Lemma}
+In this section, we present an especially convenient relationship between the Hausdorff dimension of a set and how the size of this set scales with distance. To grasp its proof, as well as a few concepts to come, we need to understand weak convergence.
+
+\begin{definition}[\textbf{Weak Convergence of Measures}]
+A sequence $(\mu_j)_{j=1}^{\infty}$ of Borel measures on \( \mathbb{R}^d \) converges weakly to a Borel measure \( \mu \) on \( \mathbb{R}^d \) if
+
+$$\forall \varphi \in C_c(\mathbb{R}^nd: \hspace{0.1 cm} \int \varphi \, d\mu_j \to \int \varphi \, d\mu \hspace{0.1 cm} \text{ as } j \to \infty$$
+Write \( \mu_j \rightharpoonup \mu \) if $\mu_j$ coverges weakly to $\mu$, as \( j \to \infty \).
+\end{definition}
+
+
+The proof of the next theorem depends on the separability of the space \( C_c(\mathbb{R}^d) \).
+
+\begin{theorem} [\textbf{Weakly Convergent Subsequence}] \label{wsubseq}
+Any sequence $(\mu_j)_{j=1}^{\infty}$ of Borel measures on \( \mathbb{R}^d \) such that \( \sup_{j \in \mathbb{N}^*} \mu_j(\mathbb{R}^d) < \infty \) has a weakly converging subsequence; that is, there is a subsequence  $(\mu_{i_k}) _{k=1}^\infty$ and a Borel measure \( \mu \) on $\mathbb{R}^d$ satisfying
+
+$$\forall \varphi \in C_c(\mathbb{R}^d): \hspace{0.1 cm}\int \varphi \, d\nu_{i_k} \to \int \varphi \, d\nu, \hspace{0.1 cm} \text{ as } k \to \infty$$
+\end{theorem}
+
+For some types of Borel measures, it will be handy to approximate them with smooth functions. This can be done with approximate identities:
+
+\begin{definition}[\textbf{Approximate Identity}]
+A family \( ( \psi_\varepsilon )_{\varepsilon > 0} \) of real-valued functions on \( \mathbb{R}^d \) is an \emph{approximate identity} if, for all \( \varepsilon > 0 \), each of these conditions hold:
+\begin{itemize}
+    \item $\psi_\varepsilon$ is non-negative and continuous,
+    \item $\operatorname{spt} (\psi_\varepsilon) \subset B(0, \varepsilon)$, and
+    \item $\int \psi_\varepsilon = 1 $
+\end{itemize}
+\end{definition}
+
+\begin{theorem}[\textbf{Approximation of Measures by Approximate Identity}]
+Let \( ( \psi_\varepsilon )_{\varepsilon > 0} \) be an approximate identity and \( \mu \) be a locally finite Borel measure on \( \mathbb{R}^d \). Then \( \psi_\varepsilon * \mu \) converges weakly to \( \mu \) as \( \varepsilon \to 0 \), that is,
+\[
+\int \varphi(\psi_\varepsilon * \mu) \, d\mathcal{L}^d \to \int \varphi \, d\mu
+\quad \forall \varphi \in C_0(\mathbb{R}^d).
+\]
+\end{theorem}
+
+
+\medskip
+
+Now, we are ready to establish Frostman's lemma. For each Borel subset $A$ of $\mathbb{R}^d$, we work with the collection
+\[
+\mathcal{M}(A) = \left\{
+    \mu \text{ Borel measure on } \mathbb{R}^d \ \middle| \
+    \begin{aligned}
+        &\operatorname{spt}(\mu) \subset A \text{, } \operatorname{spt}(\mu) \text{  is compact}, 0 < \mu(A) < \infty
+    \end{aligned}
+\right\}.
+\]
+
+\begin{lemma}[\textbf{Frostman 1935}] \label{eq:Frost}
+Let \( A \) be a Borel subset of \( \mathbb{R}^d \) and \( 0 \leq s < d \). Then
+\begin{equation}
+\mathcal{H}^s(A) > 0  \iff (\star) \notag
+\end{equation}
+where \( (\star) \) denotes the condition:
+$$
+\exists \mu \in \mathcal{M}(A), \hspace{0.07cm}  \exists C_\mu > 0, \hspace{0.07cm} \forall x \in \mathbb{R}^d, \hspace{0.07cm} \forall r > 0: \hspace{0.07cm} \mu(B(x, r)) \le C_\mu r^s.
+$$
+Consequently,
+$$\dim_H(A) = \sup \left\{ s \geq 0 : (\star) \text{ holds} \right\}$$
+\end{lemma}
+
+A measure satisfying condition $(\star)$ is called an $s$-\textit{Frostman measure}.
+\begin{proof}~
+\begin{enumerate}
+\item[($\Leftarrow$)] Let $\{C_j\}_{j=1}^{\infty}$ cover $A$. For each $n \in \mathbb{N}^*$, choose a ball $B_j \supset C_j$ with \( \operatorname{diam}(B_j) = \operatorname{diam}(C_j) \). Then,
+$$
+\sum_{j=1}^{\infty} (\operatorname{diam}C_j)^s = \sum_{j=1}^{\infty}  (\operatorname{diam}B_j)^s \ge \sum_{j=1}^{\infty} \mu(B_j) \ge \sum_{j=1}^{\infty} \mu(C_j) \ge \mu(A) > 0,
+$$
+hence \( \mathcal{H}^s(A) > 0 \).
+\item[($\Rightarrow$)] Assume \( A \) is compact with \(\mathcal{H}^s(A) > 0 \). Then, there is \( c > 0 \) such that
+\begin{equation}
+\sum_j d(C_j)^s \geq c
+\label{eq:lower-bound}
+\end{equation}
+for all coverings \( C_j,\, j = 1, 2, \dots \), of \( A \). We construct the measure \( \mu \) as a weak limit of measures \( (\mu_k)_{k=1}^\infty \). To define \( \mu_k \), consider the standard dyadic cubes in \( \mathbb{R}^d \) of side-length \( 2^{-k} \), i.e., sets of the form
+\[
+Q = \prod_{i=1}^d \left[ \frac{m_i}{2^k}, \frac{m_i + 1}{2^k} \right), \quad \text{where } m_i \in \mathbb{Z}.
+\]
+These cubes form a partition of \( \mathbb{R}^d \). Now, define a measure \( \mu_{k,1} \) as follows:
+\begin{itemize}
+    \item For each cube \( Q \) such that \( A \cap Q \neq \emptyset \), define \( \mu_{k,1} \) on \( Q \) by
+    \[
+    \mu_{k,1}|_Q = \frac{\operatorname{diam}(Q)^s}{|Q|} \cdot \mathcal{L}^d|_Q,
+    \]
+    so that
+    \[
+    \mu_{k,1}(Q) = \operatorname{diam}(Q)^s.
+    \]
+    (Note \(\operatorname{diam}(Q) \sim 2^{-k} \), up to a constant depending on the dimension \( d \).)
+
+    \item For each cube \( Q \) such that \( A \cap Q = \emptyset \), we let \( \mu_{k,1} \) be the zero measure on \( Q \), i.e., \( \mu_{k,1}(Q) = 0 \).
+\end{itemize}
+
+Thus, \( \mu_{k,1} \) is supported only on cubes that intersect \( A \).
+While the measure \( \mu_{k,1} \) assigns appropriate mass to dyadic cubes of side-length \( 2^{-k} \), it may assign too much mass to balls of radius greater than \( 2^{-k} \). To ensure better control over such balls, iteratively modify \( \mu_{k,1} \) to construct a measure \( \mu_{k,2} \) with improved scaling behavior.
+We begin by examining the dyadic cubes of side-length \( 2^{1 - k} \). For each such cube \( Q \), we proceed as follows:
+\begin{itemize}
+    \item If \( \mu_{k,1}(Q) \leq \operatorname{diam}(Q)^s \), we keep \( \mu_{k,2}|_Q = \mu_{k,1}|_Q \); that is, we make no modification to the measure on \( Q \).
+
+    \item If \( \mu_{k,1}(Q) > \operatorname{diam}(Q)^s \), we rescale the measure \( \mu_{k,1}|_Q \) by a constant factor so that the total mass on \( Q \) becomes exactly \( \operatorname{diam}(Q)^s \). Specifically, we define
+    \[
+    \mu_{k,2}|_Q = \frac{\operatorname{diam}(Q)^s}{\mu_{k,1}(Q)} \cdot \mu_{k,1}|_Q.
+    \]
+\end{itemize}
+This ensures that \( \mu_{k,2}(Q) \leq \operatorname{diam}(Q)^s \) for all dyadic cubes of side-length \( 2^{1-k} \), and that \( \mu_{k,2} \) is still absolutely continuous with respect to Lebesgue measure on each cube. Moreover, the measure \( \mu_{k,2} \) agrees with \( \mu_{k,1} \) wherever the latter satisfies the desired bound. Continue this until we come to a single cube \( Q_0 \) which contains our compact set \( A \) (we may assume to begin with that the dyadic partitioning is chosen so that \( A \) is inside some cube belonging to it). Let \( \mu_k \) be the final measure obtained in this way. Then, since we never increased the measure along the process, \( \mu_k(Q) \leq \operatorname{diam}(Q)^s \) for all dyadic cubes with side-length at least \( 2^{-k} \). In fact, this holds for all dyadic cubes by the first step of the construction. This implies easily that \( \mu_k(B) \lesssim_n \operatorname{diam}(B)^s \) for all balls \( B \). The construction yields that every \( x \in A \) is contained in some dyadic subcube \( Q \) of \( Q_0 \) with side-length at least \( 2^{-k} \) such that
+\[
+\mu_k(Q) = \operatorname{diam}(Q)^s.
+\]
+Choosing maximal, and hence disjoint, such cubes \( Q_j \), they cover \( A \), and thus by equation~\eqref{eq:lower-bound},
+\begin{equation}
+\mu_k(\mathbb{R}^d) = \sum_j \mu_k(Q_j) = \sum_j \operatorname{diam}(Q_j)^s \geq c.
+\label{2.4}
+\end{equation}
+Now, take some weakly converging subsequence of \( (\mu_k) \) and consider the limit measure \( \mu \). Then, it is immediate from the construction that \( \mathrm{spt}\, \mu \subset A \) (here we use that \( A \) is compact). It is also clear that \( \mu(B) \lesssim_n \operatorname{diam}(B)^s \) for all balls \( B \). The only danger is that \( \mu \equiv 0 \), but by equation~\eqref{2.4}, this cannot happen.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+In the forward direction of Lemma \ref{eq:Frost}, we only treated the case where \( A \) is compact. Extending the proof to Borel sets requires additional approximation arguments; see Appendix B of \cite{bishopperes2017fractals}.
+\end{remark}
+
+\begin{proposition} \label{prop1.24}
+If \( A \subset \mathbb{R}^m \) and \( B \subset \mathbb{R}^n \) are Borel sets, then
+\[
+\dim_H(A) + \dim_H(B) \le \dim_H(A \times B).
+\]
+\end{proposition}
+
+\begin{proof}
+Let \( s = \dim_H(A) \) and \( t = \dim_H(B) \). By Frostman’s lemma, we can find measures \( \mu_A \in \mathcal{M}(A) \) and \( \mu_B \in \mathcal{M}(B) \) such that
+\[
+\mu_A(B^m(x, r)) \le r^s \quad \text{and} \quad \mu_B(B^n(x, r)) \le r^t.
+\]
+Then, \( \mu := \mu_A \times \mu_B \in \mathcal{M}(A \times B) \), and we have
+\[
+\begin{aligned}
+\mu(B^{m+n}((x,y), r))
+&\le \mu(B^m(x, r) \times B^n(y, r)) \\
+&= \mu_A(B^m(x, r)) \mu_B(B^n(y, r)) \\
+&\le r^{s + t}.
+\end{aligned}
+\]
+Again, Frostman's lemma ensures that the Hausdorff dimension of $A \times B$ is the supremum of all such exponents, so $\dim_H(A \times B) \geq s+t$.
+\end{proof}
+
+
+\chapter{Fourier Transforms and Energy Integrals of Measures}
+Next, we study the Fourier transforms of $L^1$ functions and Borel measures. Apart from the standard theory, we develop the formula for the Fourier transform of the surface measure on the unit sphere, and we finally represent the energy-integrals in terms of the Fourier transform and give the key relationship between the Hausdorff dimension and Fourier transform.
+
+\section{Fourier Transform in \texorpdfstring{$L^1(\mathbb{R}^d)$ and $L^2(\mathbb{R}^d)$}{L1(Rd) and L2(Rd)}}
+
+
+\begin{definition}[\textbf{Fourier Transform}]
+Let \( f \in L^1(\mathbb{R}^d) \). The \emph{Fourier transform (FT)} of \( f \), denoted by \( \widehat{f} \) or \( \mathcal{F}(f) \), is defined by
+\[
+\mathcal{F}(f(\xi))= \widehat{f}(\xi)=\int_{\mathbb{R}^d} f(x) e^{-2\pi i x \cdot \xi} \, dx, \qquad \forall\xi \in \mathbb{R}^d.
+\]
+\end{definition}
+
+\begin{proposition} \label{prop4}
+The Fourier transform maps \( L^1(\mathbb{R}^d) \) into \( \mathcal{BC}(\mathbb{R}^d) \), the space of bounded continuous functions on \( \mathbb{R}^d \) (see~\ref{BC}).
+\end{proposition}
+
+\begin{proof}
+Given $f \in L^1(\mathbb{R}^d)$ and $x \in \mathbb{R}^d$, note that \( \left| f(x)e^{-2\pi i x \cdot \xi} \right| = |f(x)| \), so the integral representing \( \widehat{f} \) converges for each \( \xi \in  \mathbb{R}^d\), and
+\[
+\sup_{\xi \in \mathbb{R}^d} |\widehat{f}(\xi)| \leq \int_{\mathbb{R}^d} |f(x)| \, dx = \|f\|_1.
+\]
+To check the continuity of $\widehat{f}$, let \( x \in \mathbb{R}^d\), and note by continuity of the exponential function that
+\[
+f(x)e^{-2\pi i x \cdot \xi} \to f(x)e^{-2\pi i x \cdot \xi_0} \quad \text{as } \xi \to \xi_0 \in \mathbb{R}^d,
+\]
+
+and the integrand is dominated in absolute value by \( |f| \) $\in L^1(\mathbb{R^d)}$. Applying the dominated convergence theorem, we conclude
+
+
+\[
+\widehat{f}(\xi) = \int_{\mathbb{R}^d} f(x)e^{-2\pi i x \cdot \xi} \, dx \to \int_{\mathbb{R}^d} f(x)e^{-2\pi i x \cdot \xi_0} \, dx = \widehat{f}(\xi_0),
+\]
+as \( \xi \to \xi_0 \).
+\end{proof}
+
+We present a few elementary properties of the Fourier Transform. The proofs of these facts are omitted; they can be found in section 8.3 of~\cite{folland1999real}.
+
+\begin{theorem} \label{thm:fourier-properties}
+Assume \( f, g \in L^1(\mathbb{R}^d) \). For $a \in \mathbb{R}^d$ and $r > 0$, define
+$$
+\tau_a(x) = x + a, \qquad \delta_r(x) = r x.
+$$
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{(Translation)}
+    $\widehat{f \circ \tau_a}(\xi) = e^{2\pi i a \cdot \xi} \, \widehat{f}(\xi),$ \hspace{0.07cm} for all $\xi \in \mathbb{R}^d$
+    \item \label{dilation} \textbf{(Dilation)} $\widehat{f \circ \delta_r}(\xi) = r^{-n} \widehat{f}(r^{-1} \xi),$ \hspace{0.07cm} for all $\xi \in \mathbb{R}^d$.
+    \item \textbf{(Product)} \label{product} $\int \widehat{f} \, g = \int f \, \widehat{g}$
+    \item \textbf{(Convolution)} \label{convolution} \( \widehat{f * g}\ = \widehat{f} \cdot \widehat{g} \).
+    \item \label{parseval} \textbf{(Parseval's formula)} If \( f, g \in L^2(\mathbb{R}^d) \), then
+    \[
+    \int_{\mathbb{R}^d} f(x) \, \overline{g(x)} \, dx = \int_{\mathbb{R}^d} \widehat{f}(\xi) \, \overline{\widehat{g}(\xi)} \, d\xi.
+    \]
+    \item \label{planch} \textbf{(Plancherel's formula)} If \( f \in L^2(\mathbb{R}^d) \), then
+    \[
+    \|f\|_{L^2} = \|\widehat{f}\|_{L^2}.
+    \]
+    \item \label{usefulFT} \refstepcounter{enumi} \textbf{(Useful Specific Fourier Transform)}
+    If \( h(x) = e^{-\pi a |x|^2} \) where \( a > 0 \), then
+    \[
+    \widehat{h}(\xi) = a^{-n/2} e^{-\pi |\xi|^2 / a}.
+    \]
+\end{enumerate}
+\end{theorem}
+
+We are now ready to invert the Fourier transform. If \( f \in L^1 \), define $$ f^\vee(x) = \widehat{f} (-x) = \int f(\xi) e^{2\pi i \xi \cdot x} \, d\xi$$ and we claim that if $f, \widehat{f} \in L^1(\mathbb{R}^d)$, then $ (\widehat{f})^\vee (x) = f(x)$ at almost every $x \in \mathbb{R}^d$.
+
+\begin{theorem}[\textbf{The Fourier Inversion Theorem}]
+If \( f \in L^1 \) and \( \widehat{f} \in L^1 \), then \( f \) agrees almost everywhere with a continuous function \( f_0 \), and
+\[
+\left( \widehat{f} \right)^\vee = \left( f^\vee \right)\widehat{} = f_0.
+\]
+\end{theorem}
+
+\begin{proof}
+For \( t > 0 \) and \( x \in \mathbb{R}^d \), define
+\[
+\phi(\xi) = e^{2\pi i x \cdot \xi - \pi t^2 |\xi|^2}.
+\]
+
+By~\ref{usefulFT}, the Fourier transform of \( h(\xi) := e^{-\pi t^2 |\xi|^2} \) is
+\[
+\widehat{h}(y) = t^{-n} e^{-\pi |y|^2 / t^2}.
+\]
+Since \( \phi(\xi) = e^{2\pi i x \cdot \xi} \cdot h(\xi) \), then by~\ref{dilation}:
+\[
+\widehat{\phi}(y) = \widehat{h}(y - x) = t^{-n} e^{-\pi |y - x|^2 / t^2} = g_t(x - y),
+\]
+where \( g(x) = e^{-\pi |x|^2} \). By~\ref{product}, we have
+\[
+\int e^{-\pi t^2 |\xi|^2} e^{2\pi i \xi \cdot x} \, \widehat{f}(\xi) \, d\xi = \int \widehat{\phi} \, f = \int f * \widehat{\phi} = f * g_t(x).
+\]
+
+Since \( \int e^{-\pi |x|^2} dx = 1 \), it can be deduced that \( f * g_t \to f \) in the \( L^1 \)-norm as \( t \to 0 \). On the other hand, since \( \widehat{f} \in L^1(\mathbb{R}^d) \), then by dominated convergence:
+\[
+\lim_{t \to 0} \int e^{-\pi t^2 |\xi|^2} e^{2\pi i \xi \cdot x} \widehat{f}(\xi) \, d\xi = \int e^{2\pi i \xi \cdot x} \widehat{f}(\xi) \, d\xi = (\widehat{f})^\vee(x).
+\]
+
+It follows that \( f = (\widehat{f})^\vee \) a.e., and similarly \( (\widehat{f^\vee}) = f \) a.e. Since \( (\widehat{f})^\vee \) and \( (\widehat{f^\vee}) \) are continuous, being Fourier transforms of \( L^1 \) functions, the proof is complete.
+
+\end{proof}
+
+\begin{corollary} \label{eq:inversion} {\textbf{(Inversion Formula)}}
+If \( f, \widehat{f} \in L^1(\mathbb{R}^d) \), then
+$$
+f(x) = \int \widehat{f}(\xi) e^{2\pi i \xi \cdot x} \, d\xi,
+$$
+up to a set of measure zero.
+\end{corollary}
+
+\begin{corollary}
+    If $f \in L^1(\mathbb{R}^d)$ and $\widehat{f} = 0$, then $f = 0$ almost everywhere.
+\end{corollary}
+
+\begin{corollary} \label{eqn3.10}
+If $f, g, fg, \widehat{f}, \widehat{g} \in L^1(\mathbb{R}^d)$, then $\widehat{fg} = \widehat{f} * \widehat{g}$
+\end{corollary}
+
+\begin{proof}
+Substituting the inversion formula for \( g \)
+\[
+g(x) = \int_{\mathbb{R}^d} \widehat{g}(\eta) e^{2\pi i x \cdot \eta} \, d\eta.
+\]
+into the definition of the Fourier transform  of $fg$ gives
+\[
+\widehat{fg}(\xi)
+= \int_{\mathbb{R}^d} f(x) \left( \int_{\mathbb{R}^n} \widehat{g}(\eta) e^{2\pi i x \cdot \eta} \, d\eta \right) e^{-2\pi i x \cdot \xi} \, dx = I
+\]
+By Fubini's theorem,
+\[
+I = \int_{\mathbb{R}^d} \widehat{g}(\eta) \left( \int_{\mathbb{R}^d} f(x) e^{-2\pi i x \cdot (\xi - \eta)} \, dx \right) d\eta
+= \int_{\mathbb{R}^d} \widehat{f}(\xi - \eta) \widehat{g}(\eta) \, d\eta.
+\]
+Thus,
+\[
+\widehat{fg} = \widehat{f} * \widehat{g}.
+\]
+\end{proof}
+
+Each of following formulas restate formula~\ref{eq:inversion}.
+\begin{corollary} \label{3.9}
+Let \( \tilde{f}(x) = f(-x) \), then
+\begin{itemize}
+    \item [a.] $\check{f} = \tilde{f} = \widehat{\tilde{f}}$
+    \item [b.] $\widehat{\widehat{f}} = \tilde{f}$
+    \item [c.] $\overbar{f} = \widehat{\overbar{\widehat{f}}}$
+\end{itemize}
+
+\end{corollary}
+
+\section{Fourier Transform of Measures and Distributions}
+
+\begin{definition}
+    The \textit{Fourier transform} of a finite Borel measure $\mu$ on $\mathbb{R}^d$ is $$ \widehat{\mu}(\xi) = \int e^{-2\pi i \xi \cdot x} \, d\mu(x), \qquad \forall\xi \in \mathbb{R}^d $$
+\end{definition}
+
+Similar to~\ref{prop4}, we can show that $ \widehat{\mu}(\xi) \in \mathcal{BC}(\mathbb{R}^d)$. The next result is more specific.
+\begin{proposition}
+If \( \mu \in \mathcal{M}(\mathbb{R}^d) \), then $\widehat{\mu}(\xi)$ is bounded and Lipschitz continuous.
+\end{proposition}
+
+\begin{proof}
+For each $\xi \in \mathbb{R}^d$, note that
+$$ |\widehat{\mu}(\xi)| = \left| \int e^{-2\pi i\, \xi \cdot x} \, d\mu(x) \right|
+\le \int |e^{-2\pi i\, \xi \cdot x}| \, d\mu(x) = \mu(\mathbb{R}^d) $$
+Thus, $\|\widehat{\mu} \|_\infty \le \mu(\mathbb{R}^d)$. Moreover, choose $R > 0$ such that $ \operatorname{spt} (\mu) \subset B(0, R) $. If \( x, y \in \mathbb{R}^d \), then
+\[
+|\widehat{\mu}(x) - \widehat{\mu}(y)|
+= \left| \int \left(e^{-2\pi i\, x \cdot z} - e^{-2\pi i\, y \cdot z} \right) d\mu(z) \right| = \left| \int_{\operatorname{spt}(\mu)} \left( e^{-2\pi i\, x \cdot z} - e^{-2\pi i\, y \cdot z} \right) d\mu(z) \right|
+\]
+Since $|e^{i\theta} - e^{i\phi}| \le |\theta - \phi|$, we get for each $z \in \operatorname{spt} (\mu) \subset B(0, R)$ that
+\[
+|e^{-2\pi i\, x \cdot z} - e^{-2\pi i\, y \cdot z}|
+\le 2\pi |(x - y) \cdot z|
+\le 2\pi \|x - y\| \cdot \|z\| \leq  2\pi R \|x - y\|
+\]
+The Lipschitz continuity then follows from
+\begin{align*}
+|\widehat{\mu}(x) - \widehat{\mu}(y)|
+&\le \int_{\operatorname{spt}(\mu)} \left| e^{-2\pi i\, x \cdot z} - e^{-2\pi i\, y \cdot z} \right| d\mu(z) \\
+&\le \int_{\operatorname{spt}(\mu)} 2\pi R \|x - y\| \, d\mu(z) = 2\pi R \mu(\mathbb{R}^d)\|x - y\|
+\end{align*}
+\end{proof}
+
+\begin{definition}
+The \emph{convolution} of two functions \( f \) and \( g \) on $\mathbb{R}^d$ is defined by
+\[
+(f * g)(x) = \int f(x - y)\, g(y) \, dy.
+\]
+Similarly, the \emph{convolution} of $f$ and a finite Borel measure $\mu$ on  $\mathbb{R}^d$ is
+\[
+(f * \mu)(x) = \int f(x - y) \, d\mu_y.
+\]
+\end{definition}
+
+\begin{definition}
+For \( m > -\frac{1}{2} \), the \textit{Bessel functions} \( J_m : [0, \infty) \to \mathbb{R} \) are defined by
+\[
+J_m(u) := \frac{(u/2)^m}{\Gamma(m + \frac{1}{2}) \Gamma(\frac{1}{2})} \int_{-1}^1 e^{iut}(1 - t^2)^{m - 1/2} \, dt,
+\]
+where \( \Gamma(x) = \int_0^\infty t^{x - 1} e^{-t} \, dt.\)
+\end{definition}
+
+We list a few useful facts about the family $(J_m)_{m>\frac{-1}{2}}$. For the sake of brevity, we omit their proofs, but they can be found in section 3.4 of \cite{mattila2015fourier}.
+
+\begin{lemma}\label{lemma:bessel-fourier}
+Let \( d \in \mathbb{N}^* \). Then:
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{(Radial Fourier Transform)}
+    For a radial function \( f(x) = \psi(|x|) \in L^1(\mathbb{R}^d) \), there exists a constant \( c_1(d) > 0 \) such that
+    \begin{equation}\label{eq:FTBessel}
+    \widehat{f}(x) = c_1(d)\, |x|^{-(d-2)/2} \int_0^\infty \psi(s)\, J_{(d-2)/2}(2\pi |x| s)\, s^{d/2} \, ds.
+    \end{equation}
+
+    \item \textbf{(Decay of Bessel Functions)}
+    For each \( m > -\frac{1}{2} \), there exists a constant \( C(m) > 0 \) such that
+    \begin{equation}\label{eq:bessel-decay}
+    |J_m(t)| \leq C(m)\, t^{-1/2} \quad \text{for all } t > 0.
+    \end{equation}
+
+    \item \textbf{(Fourier Transform of Surface Measure)}
+    The Fourier transform of the surface measure \( \sigma^{d-1} \) on \( S^{d-1} \subset \mathbb{R}^d \) is given by
+    \begin{equation}\label{eq:sphere-fourier}
+    \widehat{\sigma^{d-1}}(x) = c_2(d)\, |x|^{(2 - d)/2} J_{(d-2)/2}(2\pi |x|),
+    \end{equation}
+    for some constant \( c_2(d) > 0 \).
+\end{enumerate}
+\end{lemma}
+
+\noindent
+As a consequence of \eqref{eq:bessel-decay} and \eqref{eq:sphere-fourier}, we have the estimate:
+\begin{equation}\label{eq:sphere-decay}
+\left| \widehat{\sigma^{d-1}}(x) \right| \le C(d)\, |x|^{(1 - d)/2}, \quad \text{for } x \in \mathbb{R}^d.
+\end{equation}
+
+
+Our final aim in this section is to compute the Fourier transform of the following useful function.
+\begin{definition} \label{kernel}
+Let $0<s<d$. The \textit{Riesz kernel} on $\mathbb{R}^d$ is the function $$k_s(x) = |x|^{-s}, \text{\quad for all } x \in \mathbb{R}^d.$$
+\end{definition}
+We use the notation $k_s$ for the Riesz kernel throughout.
+
+\begin{definition}
+A \textit{tempered distribution} is a continuous linear functional $$ T : \mathcal{S}(\mathbb{R}^d) \to \mathbb{C}.$$
+\end{definition}
+
+\begin{remark}
+Continuity of \( T \) means that there exist finitely many multi-indices \( \alpha_1, \dots, \alpha_k \), \( \beta_1, \dots, \beta_k \), and a constant \( C > 0 \), such that for all \( \varphi \in \mathcal{S}(\mathbb{R}^d) \),
+\[
+|T(\varphi)| \leq C \sum_{j=1}^k \sup_{x \in \mathbb{R}^d} |x^{\alpha_j} D^{\beta_j} \varphi(x)|.
+\]
+
+Equivalently, if \( \varphi_n \to 0 \) in \( \mathcal{S}(\mathbb{R}^d) \), then \( T(\varphi_n) \to 0 \) in \( \mathbb{C} \). That is, \( T \) is continuous with respect to the Schwartz space topology. See \ref{def:schwartz}.
+\end{remark}
+
+Define the Fourier transform of a tempered distribution $T$, denoted by $\widehat{T}$, to be the function
+\[
+\widehat{T}(\varphi) := T(\widehat{\varphi}) \quad \text{for all } \varphi \in \mathcal{S}(\mathbb{R}^d).
+\]
+
+\begin{proposition}
+    The Fourier transform of a tempered distribution $T$ is a unique tempered distribution.
+\end{proposition}
+
+\begin{lemma}[\textbf{Even Locally Integrable Functions Are Self-Dual}] \label{lem:FourierSelfDualEven}
+Let \( g \in L^1_{\text{loc}}(\mathbb{R}^d) \) be an even function such that its distributional Fourier transform \( f \) is a locally integrable function. Then
+\[
+\widehat{f} = g \quad \text{in } \mathcal{S}'(\mathbb{R}^d).
+\]
+\end{lemma}
+
+\begin{proof}
+Let \( \varphi \in \mathcal{S}(\mathbb{R}^d) \). Then,
+\[
+\widehat{f}(\varphi) = f(\widehat{\varphi}) = \int_{\mathbb{R}^d} f(x) \, \widehat{\varphi}(x) \, dx
+= \int_{\mathbb{R}^d} \widehat{g}(x) \, \widehat{\varphi}(x) \, dx.
+\]
+By corollary \ref{3.9}, the product formula \ref{product}, and the evenness of $g$, we have
+\[
+\int \widehat{g}(x) \, \widehat{\varphi}(x) \, dx
+= \int g(-x) \, \varphi(x) \, dx
+= \int g(x) \, \varphi(x) \, dx.
+\]
+Hence, \( \widehat{f} = g \) as distributions.
+\end{proof}
+
+\begin{theorem}[\textbf{Fourier Transform of Riesz Kernels}] \label{thm:RieszFourier}
+Let \( 0 < s < d \). Then, there is a constant \( \gamma(d,s) > 0 \) such that
+\[
+\widehat{k_s} = \gamma(d,s) \, k_{d-s}
+\quad \text{as tempered distributions on } \mathbb{R}^d,
+\]
+that is, for all \( \varphi \in \mathcal{S}(\mathbb{R}^d) \),
+\begin{equation}
+\int_{\mathbb{R}^d} k_s(x) \, \widehat{\varphi}(x) \, dx
+= \gamma(d,s) \int_{\mathbb{R}^d} k_{d-s}(x) \, \varphi(x) \, dx.
+\label{eq:RieszFourier}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+There are two cases to consider.
+
+\textbf{Case 1:} \( \frac{d}{2} < s < d \). \\
+We first show that \( k_s \in L^1 + L^2 = \{ f_1 + f_2 : f_i \in L^i(\mathbb{R}^d) \text{ for } i = 1, 2\) \}. Note
+\[
+\int_{B(0,1)} |x|^{-s} \, dx < \infty \quad \text{(as } s < d \text{)},
+\quad \text{and} \quad
+\int_{\mathbb{R}^d \setminus B(0,1)} |x|^{-2s} \, dx < \infty \quad \text{(as } 2s > d \text{)},
+\]
+so \( k_s \in L^1 + L^2 \). Obeserve that \( \widehat{k_s} \) is then defined as a function in \( L^\infty + L^2 \).
+
+Since \( k_s \) is radial and satisfies \( k_s(rx) = r^{-s} k_s(x) \) for $r>0$, then by facts \ref{eq:FTBessel} and \ref{dilation}, the Fourier transform \( \widehat{k_s} \) is radial and has the form $\widehat{k_s}(rx) = r^{s-d} \widehat{k_s}(x)$. Thus,
+\[
+\widehat{k_s}(x) = \gamma(d,s) \, k_{d-s}(x), \text{\quad for some } \gamma(d,s) > 0
+\]
+Moreover, by the product formula \ref{product} and Fubini's theorem, for any \( \varphi \in \mathcal{S}(\mathbb{R}^d) \),
+\[
+\int_{\mathbb{R}^d} k_s(x) \, \widehat{\varphi}(x) \, dx
+= \int_{\mathbb{R}^d} \widehat{k_s}(x) \, \varphi(x) \, dx
+= \gamma(d,s) \int_{\mathbb{R}^d} k_{d-s}(x) \, \varphi(x) \, dx,
+\]
+establishing formula \eqref{eq:RieszFourier}.
+
+\textbf{Case 2:} \( 0 < s \leq \frac{d}{2} \). \\
+In this range, \( k_s \notin L^1 + L^2 \), so the Fourier transform must be interpreted in the distributional sense. From Case 1, we already know that
+\[
+\widehat{k_s} = \gamma(d,s) \, k_{d-s}
+\quad \text{as tempered distributions}.
+\]
+The right-hand side is locally integrable, so we apply lemma \ref{lem:FourierSelfDualEven} with \( g := k_s \) and \( f := \gamma(d,s) \, k_{d-s} \). Then:
+\[
+\widehat{f} = \widehat{\,\gamma(d,s) \, k_{d-s}\,} = k_s,
+\]
+which implies
+\[
+\widehat{k_s} = \gamma(d,s) \, k_{d-s}
+\quad \text{as tempered distributions}.
+\]
+
+Thus, \eqref{eq:RieszFourier} holds for all \( 0 < s < d \).
+\end{proof}
+
+
+
+\section{Energy Integrals}
+\begin{definition}
+Let $s>0$. The \textit{\( s\)-dimensional Riesz potential}  of a Borel measure \( \mu \) on $\mathbb{R}^d$ is defined by
+\[
+\mathbb{V}^\mu_s(x) = \int |x - y|^{-s} \, d\mu(y), \quad \text{for } x \in \mathbb{R}^d.
+\] Moreover, the \textit{\( s\)-dimensional Riesz energy}, or simply the \textit{\( s\)-energy}, of \( \mu \) is defined by
+\[
+\mathbb{I}_s(\mu) = \int \mathbb{V}^\mu_s(x) \, d\mu(x).
+\]
+\end{definition}
+
+\noindent
+Before connecting energy integrals and the Hausdorff dimension, we need a lemma.
+\begin{lemma} \label{lemma5.1}
+\begin{enumerate}
+    \item If $\mu$ is a finite $s$–Frostman measure with compact support, then $\mathbb{I}_t(\mu) < \infty$ for all $t < s$.
+    \item If $\mu$ is a finite Borel measure with compact support and $\mathbb{I}_s(\mu) < \infty$, then there exists a finite $s$–Frostman measure $\nu$ satisfying
+    \[
+    \nu(A) \le 2\mu(A) \quad \text{for all } A \subseteq \mathbb{R}^d.
+    \]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+\item Choose $M > 0$ such that $\operatorname{spt}(\mu) \subset B(0, M)$. Let $x \in \operatorname{spt}(\mu)$ and $t < s$. By the monotone convergence theorem,
+\begin{align*}
+\mathbb{V}^t_\mu(x) &= \int_{\mathbb{R}^d} \frac{1}{|x - y|^t} \, d\mu(y)
+= \sum_{j = 0}^{\infty} \int_{\left\{ \frac{2M}{2^{j+1}} \le |x - y| < \frac{2M}{2^j} \right\}} \frac{1}{|x - y|^t} \, d\mu(y) \\
+&\le \frac{2^t}{M^t} \sum_{j = 0}^{\infty} 2^{jt} \int_{\left\{ \frac{2M}{2^{j+1}} \le |x - y| < \frac{2M}{2^j} \right\}} d\mu(y) \\
+&\le \frac{2^t}{M^t} \sum_{j = 0}^{\infty} 2^{jt} \mu\left( B\left(x, \frac{2M}{2^j} \right) \right)
+\le C_{M,s,t} \sum_{j = 0}^{\infty} 2^{j(t - s)} < \infty.
+\end{align*}
+where $C_{M,s,t} > 0$ depends only on $M, s, t$. Thus
+\[
+\mathbb{I}_t(\mu) = \int_{\mathbb{R}^d} V^t\mu(x) \, d\mu(x) < \infty.
+\]
+
+
+\item Let $s > 0$ and $F = \{x \in \mathbb{R}^d : V^\mu_s(x) \le 2 \mathbb{I}_s(\mu)\}$. Then
+\begin{align*}
+\mathbb{I}_s(\mu)
+&= \int_F \mathbb{V}^\mu_s(x) \, d\mu(x) + \int_{F^c} \mathbb{V}^\mu_s(x) \, d\mu(x)
+\ge \int_{F^c} V^\mu_s(x) \, d\mu(x) \\
+&\ge 2 \mathbb{I}_s(\mu)(1 - \mu(F)).
+\end{align*}
+
+Thus $\mu(F) \ge \frac{1}{2}$. Let
+\[
+\nu(A) = \frac{\mu(A \cap F)}{\mu(F)}, \quad A \subseteq \mathbb{R}^d.
+\]
+
+Let $x \in F$. If $r > 0$ then
+\begin{align*}
+\mathbb{V}^\nu_s(x) &= \int_{\{|x - y| < r\}} \frac{1}{|x - y|^s} \, d\nu(y)
++ \int_{\{|x - y| \ge r\}} \frac{1}{|x - y|^s} \, d\nu(y) \\
+&\ge \int_{\{|x - y| < r\}} \frac{1}{|x - y|^s} \, d\nu(y)
+\ge r^{-s} \nu(B(x, r)).
+\end{align*}
+Also
+\[
+\mathbb{V}^s_\nu(x) \le \frac{1}{\mu(F)} \int_{\mathbb{R}^d} \frac{1}{|x - y|^s} \chi_F(y) \, d\mu(y)
+\le 2 \mathbb{V}^a_\mu(x) \le 4 \mathbb{I}_a(\mu).
+\]
+
+\noindent
+Thus
+\[
+\nu(B(x, r)) \le 4 \mathbb{I}_s(\mu) r^s, \quad \forall x \in F, \ \forall r > 0.
+\]
+
+\noindent
+For $x \in \mathbb{R}^d \setminus F$, there are two cases:
+
+\begin{enumerate}
+\item If, for any $r > 0$, $B(x, r) \cap F = \emptyset$, then $\nu(B(x, r)) = 0$.
+\item If some $r > 0$ satisfies $B(x, r) \cap F \ne \emptyset$, let $y \in F \cap B(x, r)$, and note that
+\[
+\nu(B(x, r)) \le \nu(B(y, 2r)) \le 2^{s + 2} \mathbb{I}_s(\mu) r^s.
+\]
+\end{enumerate}
+
+\noindent
+Thus, $\nu$ is an $s$–Frostman measure with the property:
+\[
+\nu(A) \le 2 \mu(A) \quad \text{for all } A \subseteq \mathbb{R}^d.
+\]
+\end{enumerate}
+\end{proof}
+
+\begin{theorem} \label{thm2.8}
+For any Borel set \( A \subset \mathbb{R}^d \), these values coincide
+\[
+\dim_H(A) = \sup \left\{ s \geq 0 : \exists \mu \in \mathcal{M}(A) \text{ with } \mathbb{I}_s(\mu) < \infty \right\}.
+\]
+\end{theorem}
+
+\begin{proof}
+Recall the layer-cake representation formula, which states that for any non-negative measurable function \( f \),
+\begin{equation}
+\int f \, d\mu = \int_0^\infty \mu\left( \{ x \in X : f(x) \geq t \} \right) dt.
+\label{cake}
+\end{equation}
+
+We apply this to the function \( f(y) = |x - y|^{-s} \) and note that
+\[
+\left\{ y : |x - y|^{-s} \geq t \right\} = \left\{ y : |x - y| \leq t^{-1/s} \right\} = B(x, t^{-1/s}).
+\]
+to obtain:
+\[
+\int |x - y|^{-s} \, d\mu(y) = \int_0^\infty \mu(B(x, t^{-1/s})) \, dt.
+\]
+Mako the change of variables \( r = t^{-1/s} \), so \( t = r^{-s} \), and differentiate both sides:
+\[
+dt = -s r^{-s-1} \, dr.
+\]
+Rewriting the integral, we get:
+\begin{align*}
+\int_0^\infty \mu(B(x, t^{-1/s})) \, dt
+&= \int_\infty^0 \mu(B(x, r)) \cdot (-s r^{-s-1}) \, dr \\
+&= s \int_0^\infty \frac{\mu(B(x, r))}{r^{s+1}} \, dr.
+\end{align*}
+
+Thus, if \( \mu \in \mathcal{M}(A) \) satisfies condition $(\star)$ in~\ref{eq:Frost}, then for \( 0 < t < s \) we have
+\begin{equation}
+\mathbb{I}_t(\mu) = t \int \int_0^\infty \frac{\mu(B(x, r))}{r^{t+1}} \, dr \, d\mu_x
+\leq t \mu(\mathbb{R}^d) \int_0^{d(\mathrm{spt}(\mu))} r^{s - t - 1} \, dr < \infty.
+\notag
+\end{equation}
+so \( \dim_H(A) \geq s \).
+Conversely, if \( t < \dim_H(A) \), then for some \( \varepsilon > 0 \) we have
+\[
+t + \varepsilon < \dim_H(A) \Rightarrow \mathcal{H}^{t + \varepsilon}(A) > 0.
+\]
+By Frostman's Lemma, there is a \( (t + \varepsilon) \)-Frostman measure \( \mu \in \mathcal{M}(A) \), and by ~\ref{lemma5.1}, we have \( \mathbb{I}_t(\mu) < \infty \). We showed that \( t \leq s \) for all \( t < \dim_H(A) \), so \( \dim_H(A) \leq s \).
+\end{proof}
+
+\begin{remark}
+Recalling the Riesz kernel \ref{kernel}, The $s$-energy can be expressed as
+\[
+\mathbb{I}_s(\mu) = \int k_s * \mu \, d\mu.
+\]
+\end{remark}
+
+Next, we connect the the $s$-energy to the Fourier transform of a Borel measure.
+
+\begin{theorem}{\textbf{(Fourier Representation of \( s \)-Energy)}} \label{eq:FourierRep_Energy}
+If \( \mu \in \mathcal{M}(A) \) and \( 0 < s < d \), then
+\[
+\mathbb{I}_s(\mu) = \gamma(d, s) \int |\widehat{\mu}(x)|^2 \, |x|^{s - d} \, dx,
+\]
+
+where
+$$\gamma(d, s) = \pi^{s-\frac{d}{2}} \frac{\Gamma(\frac{d-s}{2})}{\Gamma(\frac{s}{2})}$$
+\end{theorem}
+
+\begin{proof}
+We firstly prove the result for smooth measures $\varphi \in \mathcal{S}(\mathbb{R}^d)$. Note that
+\[
+I_s(\varphi) = \iint k_s(x - y) \, \varphi(x) \varphi(y) \, dx \, dy.
+\]
+By the change of variables by setting \( z = y - x \) and recalling theorem \ref{thm2.45}, we have
+\begin{align*}
+I_s(\varphi)
+&= \iint_{\mathbb{R}^d \times \mathbb{R}^d} k_s(y - x) \, \varphi(x) \varphi(y) \, dx \, dy \\
+&= \int_{\mathbb{R}^d} k_s(z) \left( \int_{\mathbb{R}^d} \varphi(x) \varphi(x + z) \, dx \right) dz \\
+&= \int_{\mathbb{R}^d} k_s(z) \left( \int_{\mathbb{R}^d} \varphi(y - z) \varphi(y) \, dy \right) dz
+\end{align*}
+
+\noindent
+This inner integral of the last term is the convolution \( (\widetilde{\varphi} * \varphi)(z) \), where \\ \( \widetilde{\varphi}(x) := \varphi(-x) \). Hence,
+\[
+I_s(\varphi) = \int_{\mathbb{R}^d} k_s(z) \, (\widetilde{\varphi} * \varphi)(z) \, dz
+\]
+Take Fourier transforms, and use corollary \ref{3.9} and Theorem~\ref{thm:RieszFourier} to get:
+\[
+\widehat{\widetilde{\varphi} * \varphi}(\xi) = \widehat{\widetilde{\varphi}}(\xi) \cdot \widehat{\varphi}(\xi) = \overline{\widehat{\varphi}(\xi)} \cdot \widehat{\varphi}(\xi) = |\widehat{\varphi}(\xi)|^2.
+\]
+Therefore, using Plancherel \ref{planch} and the identity \( \widehat{k_s} = \gamma(d,s) k_{d-s} \), we conclude:
+\[
+I_s(\varphi) = \int \widehat{k_s}(\xi) \cdot |\widehat{\varphi}(\xi)|^2 \, d\xi
+= \gamma(d,s) \int k_{d-s}(\xi) \cdot |\widehat{\varphi}(\xi)|^2 \, d\xi.
+\]
+Recalling that \( k_{d-s}(\xi) = |\xi|^{s - d} \), we have established our first claim:
+\begin{equation}
+\label{smoothmeasures}
+ I_s(\varphi) = \gamma(d,s) \int_{\mathbb{R}^d} |\widehat{\varphi}(\xi)|^2 \, |\xi|^{s-d} \, d\xi
+\end{equation}
+
+To extend the result to \( \mu \in \mathcal{M}(\mathbb{R}^d) \), we approximate \( \mu \) by smooth functions via convolution with an approximate identity. Let \( \psi \in C_c^\infty(\mathbb{R}^d) \) be a nonnegative function with \( \int \psi = 1 \), and define \( \psi_\varepsilon(x) := \varepsilon^{-d} \psi(x/\varepsilon) \). Set
+\[
+\mu_\varepsilon := \psi_\varepsilon * \mu,
+\]
+so that \( \mu_\varepsilon \in C^\infty(\mathbb{R}^d) \) and \( \mu_\varepsilon \to \mu \) in the sense of distributions as \( \varepsilon \to 0 \).
+
+Apply the previous result \eqref{smoothmeasures} to \( \mu_\varepsilon \) to get
+\[
+I_s(\mu_\varepsilon)
+= \gamma(d,s) \int |\widehat{\mu_\varepsilon}(x)|^2 |x|^{s-d} \, dx
+= \gamma(d,s) \int |\widehat{\mu}(x)|^2 |\widehat{\psi}(\varepsilon x)|^2 |x|^{s-d} \, dx,
+\]
+since \( \widehat{\mu_\varepsilon}(x) = \widehat{\psi_\varepsilon}(x) \cdot \widehat{\mu}(x) = \widehat{\psi}(\varepsilon x) \cdot \widehat{\mu}(x) \). As \( \varepsilon \to 0 \), note that
+$$\gamma(d,s) \int |\widehat{\mu}(x)|^2 |\widehat{\psi}(\varepsilon x)|^2 |x|^{s-d} \, dx \to  \gamma(d,s) \int |\widehat{\mu}(x)|^2 |x|^{s-d} \, dx.$$
+
+On the other hand,
+\begin{align}
+I_s(\mu_\varepsilon)
+&= \iint \left( |x - y|^{-s} \int \psi_\varepsilon(x - z) \, d\mu(z) \int \psi_\varepsilon(y - w) \, d\mu(w) \right) dx \, dy \notag \\
+&= \iint \left( \iint |x - y|^{-s} \psi_\varepsilon(x - z) \psi_\varepsilon(y - w) \, dx \, dy \right) d\mu(z) \, d\mu(w)
+\end{align}
+
+By the change of variables
+\[
+u = \frac{x - z}{\varepsilon}, \qquad v = \frac{y - w}{\varepsilon},
+\]
+and recalling theorem \ref{thm2.45}, the inner integral of the last term becomes
+\begin{align*}
+\iint |x - y|^{-s} \psi_\varepsilon(x - z) \psi_\varepsilon(y - w) \, dx \, dy
+&= \varepsilon^{2d} \iint |\varepsilon(u - v) + z - w|^{-s} \psi(u) \psi(v) \, du \, dv.
+\end{align*}
+
+As \( \varepsilon \to 0 \), $|\varepsilon(u - v) + z - w| \to |z - w| \text{ for } z \ne w,$
+and the integrand converges pointwise to \( |z - w|^{-s} \psi(u) \psi(v) \). Since \( \psi \in C_c^\infty(\mathbb{R}^d) \) and \( \int \psi = 1 \), we obtain
+\[
+\varepsilon^{2d} \iint |\varepsilon(u - v) + z - w|^{-s} \psi(u) \psi(v) \, du \, dv
+\to |z - w|^{-s} \quad \text{as } \varepsilon \to 0.
+\]
+
+Consider the case where $I_s(\mu) < \infty$. For all $\varepsilon > 0$, we have the convenient bound
+\[
+\iint |x - y|^{-s} \psi_\varepsilon(x - z) \psi_\varepsilon(y - w) \, dx \, dy
+\lesssim |z - w|^{-s} \quad \text{ for } \varepsilon > 0.
+\]
+which is integrable in \( z \) and \( w \) under the assumption \( I_s(\mu) < \infty \). We now show that
+\[
+\lim_{\varepsilon \to 0} \iint F_\varepsilon(z, w) \, d\mu(z) \, d\mu(w)
+= \iint |z - w|^{-s} \, d\mu(z) \, d\mu(w),
+\]
+where
+\[
+F_\varepsilon(z, w) := \iint |x - y|^{-s} \psi_\varepsilon(x - z) \psi_\varepsilon(y - w) \, dx \, dy.
+\]
+
+Again, let \( x = z + \varepsilon u, \, y = w + \varepsilon v \) to have
+\[
+F_\varepsilon(z, w) = \iint |\varepsilon(u - v) + z - w|^{-s} \psi(u) \psi(v) \, du \, dv
+\to |z - w|^{-s}
+\quad \text{as } \varepsilon \to 0, \quad \text{for } z \neq w.
+\]
+
+Since \( \psi \) is compactly supported and nonnegative with \( \int \psi = 1 \), we have
+\[
+F_\varepsilon(z, w) \le \iint |z - w|^{-s} \psi(u) \psi(v) \, du \, dv = |z - w|^{-s},
+\]
+which is integrable by the assumption \( I_s(\mu) < \infty \). By dominated convergence,
+\[
+\lim_{\varepsilon \to 0} \iint F_\varepsilon(z, w) \, d\mu(z) \, d\mu(w) = \iint |z - w|^{-s} \, d\mu(z) \, d\mu(w) = I_s(\mu).
+\]
+
+
+Finally consider the case where \( I_s(\mu) = \infty \). Fatou's lemma guarantees that
+\begin{align*}
+\infty = I_s(\mu)
+&\le \liminf_{\varepsilon \to 0}
+\iint \left( \iint |x - y|^{-s} \psi_\varepsilon(x - z) \psi_\varepsilon(y - w) \, dx \, dy \right)
+\, d\mu(z) d\mu(w) \\
+&= \gamma(d, s) \liminf_{\varepsilon \to 0}
+\int |\widehat{\mu}(x)|^2 |\widehat{\psi}(\varepsilon x)|^2 |x|^{s - d} \, dx. \\
+&= \gamma(d, s) \int |\widehat{\mu}(x)|^2 |x|^{s - d} \, dx.
+\end{align*}
+
+We conclude our desired result
+\[
+I_s(\mu) = \lim_{\varepsilon \to 0} I_s(\mu_\varepsilon) = \gamma(d,s) \int|\widehat{\mu}(x)|^2 |x|^{s-d} \, dx.
+\]
+
+\end{proof}
+
+
+We conclude this chapter with a foundational result due to Marstrand (1954), concerning the Hausdorff dimension of orthogonal projections onto lines.
+
+Let \( d \geq 2 \), and for each unit vector \( e \in S^{d-1} \), define the orthogonal projection
+\[
+P_e : \mathbb{R}^d \to \mathbb{R}, \quad P_e(x) = e \cdot x.
+\]
+Since \( P_e \) is a Lipschitz map, it is immediate that
+\[
+\dim_H(P_e(A)) \leq \dim_H(A), \quad \text{for all } A \subset \mathbb{R}^d.
+\]
+
+The following theorem shows that, for most directions \( e \), the previous inequality is an equality if \( \dim_H(A) \leq 1 \), and the image has positive measure if \( \dim_H(A) > 1 \).
+
+\begin{theorem}[\textbf{Marstrand's Projection Theorem}]
+Let \( A \subset \mathbb{R}^d \) be a Borel set with Hausdorff dimension \( s := \dim_H(A) \). Then:
+\begin{itemize}
+    \item[(a)] If \( s \leq 1 \), then
+    \[
+    \dim_H(P_e(A)) = s \quad \text{for } \sigma^{d-1}\text{-almost every } e \in S^{d-1}.
+    \]
+
+    \item[(b)] If \( s > 1 \), then
+    \[
+    \mathcal{L}^1(P_e(A)) > 0 \quad \text{for } \sigma^{d-1}\text{-almost every } e \in S^{d-1},
+    \]
+\end{itemize}
+\end{theorem}
+
+
+\begin{proof} We follow~\cite{mattila2015fourier}.
+\begin{itemize}
+    \item [(a)] Let \( \mu \in \mathcal{M}(A) \). For \( e \in S^{d-1} \), define a measure \( \mu_e \) by
+$$
+\mu_e(B) = \mu(P_e^{-1}(B)), \quad \text{ for all Borel sets } B \subset \mathbb{R}.
+$$
+
+Then, \( \mu_e \in \mathcal{M}(P_e(A)) \), and
+$$
+\widehat{\mu_e}(r) = \int_{-\infty}^\infty e^{-2\pi i r x} \, d\mu_e(x) = \int_{\mathbb{R}^d} e^{-2\pi i r (y \cdot e)} \, d\mu(y) = \widehat{\mu}(re)
+$$
+for all \( r \in \mathbb{R} \). Assume \( 0 < s = \dim A \le 1 \). Fix \( 0 < t < s \), and choose by ~\ref{thm2.8} a measure \( \mu \in \mathcal{M}(A) \) such that \( I_t(\mu) < \infty \). Then, apply the above equation, Theorem 2.25, and a change of variables to get
+\begin{align}
+\int \mathbb{I}_t(\mu_e) \, d\sigma^{d-1}(e)
+&= \int_{S^{d-1}} \gamma(1, t) \int_{\mathbb{R}} |\widehat{\mu_e}(r)|^2 |r|^{t-1} \, dr \, d\sigma^{d-1}(e) \notag \\
+&= 2\gamma(1, t) \int_{S^{d-1}} \int_0^{\infty} |\widehat{\mu}(re)|^2 |r|^{d-1} \, dr \, d\sigma^{d-1}(e)\notag \\
+&= 2\gamma(1, t) \int_{\mathbb{R}^d} |\widehat{\mu}(x)|^2 |x|^{t - d} \, d\mathcal{L}^d(x) \notag \\
+&= 2\gamma(1, t) \gamma(d, t)^{-1} \mathbb{I}_t(\mu) < \infty.
+\notag
+\end{align}
+
+In particular, \( I_t(\mu_e) < \infty \) for \( \sigma^{n-1} \)-almost all \( e \in S^{n-1} \), and \( \dim P_e(A) \ge t \) for such \( e \). Considering a sequence \( (t_i) \) with \( t_i < s \), \( t_i \to s \), we find that \( \dim P_e(A) \ge s \) for almost all \( e \in S^{n-1} \).
+    \item [(b)] Let \( s > 1 \), then some \( \mu \in \mathcal{M}(A) \) satisfies \( I_1(\mu) < \infty \). Arguing as above with \( t = 1 \),
+\begin{equation}
+\int_{S^{d-1}} \left( \int_{-\infty}^\infty |\widehat{\mu_e}(r)|^2 \, dr \right) d\sigma^{d-1}(e) = \frac{2\mathbb{I}_1(\mu)}{\gamma(d,1)} < \infty. \notag
+\end{equation}
+
+Now, $$ \widehat{\mu_e} \in L^2(\mathbb{R}) \implies \mu_e \in L^2(\mathbb{R}) $$ for \( \sigma^{d-1} \)-a.e. \( e \in S^{d-1} \). In particular,
+$$\mu_e \ll
+\mathcal{L}^1 \text{\quad for } \sigma^{d-1}\text{ -a.e. } e \in S^{d-1}.$$ As \( \mu_e \in \mathcal{M}(P_e(A)) \), we have \( \mathcal{L}^1(P_e(A)) > 0 \) for such \( e \).
+\end{itemize}
+\end{proof}
+
+\chapter{Falconer's Distance Conjecture}
+\section{Steinhaus Theorem and Falconer's Distance Conjecture}
+In 1985, Falconer motivated his conjecture as a multidimensional generalization of a theorem of Steinhaus. The latter is an application of the following theorem.
+
+\begin{theorem}[\textbf{Lebesgue Density Theorem}] \label{LDT}
+Let \( A \subset \mathbb{R} \) be a Lebesgue measurable set. Then for \( \mathcal{L}^1 \)-almost every point \( x \in A \), we have
+\[
+\lim_{r \to 0} \frac{\mathcal{L}^1(A \cap (x - r, x + r))}{\mathcal{L}^1((x - r, x + r))} = 1.
+\]
+\end{theorem}
+
+\begin{corollary} \label{cor2}
+If \( A \subset \mathbb{R} \) is measurable and \( \mathcal{L}^1(A) > 0 \), then for any \( \varepsilon > 0 \), there exists an interval \( [a,b] \subset \mathbb{R} \) such that
+\[
+\frac{\mathcal{L}^1(A \cap [a,b])}{\mathcal{L}^1([a,b])} > 1 - \varepsilon.
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{LDT}, we can find \( x \in A \) such that
+\[
+\lim_{r \to 0} \frac{\mathcal{L}^1(A \cap (x - r, x + r))}{\mathcal{L}^1((x - r, x + r))} = 1.
+\]
+In particular, for any \( \varepsilon > 0 \), there exists \( r > 0 \) such that
+\[
+\frac{\mathcal{L}^1(A \cap (x - r, x + r))}{\mathcal{L}^1((x - r, x + r))} > 1 - \varepsilon.
+\]
+Noting that \([a,b] = [\frac{a+b}{2} - \frac{b-a}{2}, \frac{a+b}{2} + \frac{b-a}{2}] = [x - r, x + r]\), the desired result follows
+\[
+\frac{\mathcal{L}^1(A \cap [a,b])}{\mathcal{L}^1([a,b])} > 1 - \varepsilon,
+\]
+\end{proof}
+
+\begin{definition}
+The \textit{(Eucledian) distance set} of $A \subset \mathbb{R}^d$ is
+\[
+\Delta(A) := \{ \|x - y\| : x, y \in A \}
+\]
+\end{definition}
+
+\begin{theorem}[\textbf{Steinhaus}] \label{steinhaus}
+If \( A \subset \mathbb{R} \) satisfies $\mathcal{L}^1(A) >0$, then its distance set $\Delta(A)$ contains a half-open interval \([0, \varepsilon)\).
+\end{theorem}
+
+\begin{proof}
+Suppose $0 \notin \operatorname{Int}(\Delta(A))$. Given \( \varepsilon = \frac{1}{4} \), then by \hyperref[cor2]{Corollary 2} there is an interval \( [a,b] \subset \mathbb{R} \) such that
+\[
+\frac{\mathcal{L}^1(A \cap [a,b])}{\mathcal{L}^1([a,b])} > \frac{3}{4},
+\]
+Since $0 \notin \operatorname{Int}(\Delta(A))$, then for every $\varepsilon>0$, there is $t \in (0, \varepsilon)$ such that $t \notin \Delta(A)$. So, for any $\delta > 0$, we can find $t \notin \Delta(A)$ with $|t| < \delta$. Choose $\delta = \frac{\mathcal{L}^1([a,b])}{4}$, then there is
+
+$$t \notin \Delta(A) \text{\quad and \quad}|t| < \frac{\mathcal{L}^1([a,b])}{4}$$
+
+Set \( B = A \cap [a,b] \), so $A \cap (B+t) = \emptyset$, and thus
+$$\mathcal{L}^1(B \cup (B + t)) = \mathcal{L}^1(B) + \mathcal{L}^1(B + t) = 2 \mathcal{L}^1(B)> \frac{3}{2} \mathcal{L}^1([a,b]), $$
+
+But $B$ and $B+t$ are both contained in $[a,b+t] \subset [a,b+ \frac{\mathcal{L}^1([a,b])}{4}]$, which implies
+$$ \mathcal{L}^1(B \cup (B + t)) \leq  b +\frac{\mathcal{L}^1([a,b])}{4} - a = \frac{5}{4} \mathcal{L}^1([a,b]),$$ a contradiction.
+\end{proof}
+
+Steinhaus established a \hyperref[steinhaus]{connection} between the Lebesgue measure of a set and the Lebesgue measure of its distance set. However, since it applies to all sets of positive Lebesgue measure, it may be too crude to capture the geometric size of a set. To make our analysis finer, we use the Hausdorff measure, allowing for the following fundamental question:
+
+\begin{conjecture}[\textbf{Falconer's Distance Conjecture}] \label{falconer}
+If \( d \geq 2 \) and \( A \subset \mathbb{R}^d \) is a Borel set with \( \dim_H(A) > d/2 \), then
+\( \mathcal{L}^1(\Delta(A)) > 0 \), or even \( \operatorname{Int}(\Delta(A)) \neq \emptyset \).
+\end{conjecture}
+
+\begin{remark}
+If $E \subset \mathbb{R}^d$ with \( \operatorname{Int}(A) \ne \emptyset \), then there exists $ B(x_0, r) \subseteq E$  for some \( x_0 \in \mathbb{R}^d \) and \( r > 0 \).
+Note that
+\[
+\mathcal{L}^d(B(x_0, r)) = \mathcal{L}^d(B(0, r)) = r^d \mathcal{L}^d(B(0, 1))> 0,
+\]
+and by monotonicity of Lebesgue measure,
+\[
+\mathcal{L}^d(E) \ge \mathcal{L}^d(B(x_0, r)) > 0.
+\]
+\end{remark}
+
+Before proving some weaker partial results related to conjecture \ref{falconer}, it is natural to ask: \textit{Why does the conjecture specify $\frac{d}{2}$ and not a smaller threshold?}
+
+\begin{example}
+    For $d \geq 2$ and $0 < s < \frac{d}{2}$, there is a compact set $K \subset \mathbb{R}^d$ with $dim_H(K) = s$ and $\dim_H(\Delta(K)) \leq \frac{2s}{d}$
+\end{example}
+
+\begin{proof}
+The example is from section 4.2 of \cite{mattila2015fourier}.
+Let \( (m_k)_{k \in \mathbb{N}^*} \) be a rapidly increasing sequence of positive integers such that \( m_{k+1} > m_k^k \). Define
+\[
+C_k := \left\{ x \in [0,1]^d : \exists \, p_j \in \mathbb{Z} \text{ such that } |x_j - p_j/m_k| \leq m_k^{-d/s} \text{ for all } j = 1,\dots,d \right\}.
+\]
+Let \( C := \bigcap_{k=1}^\infty C_k \). Then \( C \subset [0,1]^d \) is compact, and by a standard Cantor-type dimension estimate (see also Theorem 8.15 of Falconer \cite{falconer1985geometry}), we have
+\[
+\dim_H(C) = s.
+\]
+
+Let \( d = |x - x'| \in \Delta(C_k) \) for some \( x, x' \in C_k \). By the definition of \( C_k \), for each \( j = 1, \dots, d \), there exist integers \( p_j, p_j' \in \mathbb{Z} \) such that
+\[
+\left| x_j - \frac{p_j}{m_k} \right| \le m_k^{-d/s}, \quad \left| x_j' - \frac{p_j'}{m_k} \right| \le m_k^{-d/s}.
+\]
+Let \( p = (p_1, \dots, p_d) \) and \( p' = (p_1', \dots, p_d') \in \mathbb{Z}^d \), and write:
+\[
+x = \frac{p}{m_k} + \varepsilon, \quad x' = \frac{p'}{m_k} + \varepsilon',
+\]
+where \( \| \varepsilon \|_\infty, \| \varepsilon' \|_\infty \le m_k^{-d/s} \). Then
+\[
+x - x' = \frac{p - p'}{m_k} + (\varepsilon - \varepsilon').
+\]
+
+Using the triangle inequality (and its reverse), we obtain:
+\[
+\left| \frac{p - p'}{m_k} \right| - \| \varepsilon - \varepsilon' \|_\infty
+\le |x - x'|
+\le \left| \frac{p - p'}{m_k} \right| + \| \varepsilon - \varepsilon' \|_\infty.
+\]
+
+Since \( |\varepsilon_j - \varepsilon_j'| \le 2 m_k^{-d/s} \) for all \( j = 1, \dots, d \), we have:
+\[
+\| \varepsilon - \varepsilon' \|_\infty \le 2 m_k^{-d/s}.
+\]
+
+Thus, we conclude:
+\begin{equation}
+\left| \frac{p}{m_k} - \frac{p'}{m_k} \right| - 2 m_k^{-d/s}
+\le |x - x'|
+\le \left| \frac{p}{m_k} - \frac{p'}{m_k} \right| + 2 m_k^{-d/s}.
+\label{eq:distance_sandwich}
+\end{equation}
+
+Now note that:
+\[
+\left| \frac{p}{m_k} \right| \le 2d, \quad \left| \frac{p'}{m_k} \right| \le 2d
+\quad \Rightarrow \quad |p - p'|^2 \le 16d^2 m_k^2.
+\]
+Hence, for fixed \( k \in \mathbb{N}^* \), the set \( \Delta(C_k) \) is contained in a union of at most \( 16d^2 m_k^2 \) intervals \( I_{k,i} \), each of length:
+\[
+\left( \left| \frac{p}{m_k} - \frac{p'}{m_k} \right| + 2d m_k^{-d/s} \right) - \left( \left| \frac{p}{m_k} - \frac{p'}{m_k} \right| - 2d m_k^{-d/s} \right) = 4d m_k^{-d/s}.
+\]
+
+Therefore, for any \( k \in \mathbb{N}^* \), we can estimate:
+\[
+\mathcal{H}_{4d m_k^{-d/s}}^{2s/d}(\Delta(C_k)) \le 16d^2 m_k^2 \cdot \left(4d m_k^{-d/s} \right)^{2s/d}.
+\]
+
+Taking the limit inferior as \( k \to \infty \) and using the monotonicity of Hausdorff measure under countable intersections, we get:
+\[
+\mathcal{H}^{2s/d}(\Delta(C)) \le \liminf_{k \to \infty} \mathcal{H}^{2s/d}(\Delta(C_k)) \le 16d^2 (4d)^{2s/d}.
+\]
+Hence,
+\[
+\dim_H(\Delta(C)) \le \frac{2s}{d}.
+\]
+
+\end{proof}
+
+\begin{lemma}[\textbf{Distance Measures}]
+For a Borel $A \subset \mathbb{R}^d$ and \( \mu \in \mathcal{M}(A) \), define the \emph{distance measure} \( \delta(\mu) \in \mathcal{M}(\Delta(A)) \) by
+\[
+\delta(\mu)(B) := \int \mu\left( \{ y \in A : |x - y| \in B \} \right) \, d\mu(x),
+\]
+for every Borel set \( B \subset \mathbb{R} \). That is, \( \delta(\mu) \) is the pushforward of \( \mu \times \mu \) under the distance map \( (x, y) \mapsto |x - y| \). Then:
+\begin{enumerate}
+    \item For every continuous function \( \varphi \in C(\mathbb{R}) \),
+    \[
+    \int \varphi \, d\delta(\mu) = \iint \varphi(|x - y|) \, d\mu(x) \, d\mu(y).
+    \]
+
+    \item $\operatorname{spt}(\delta(\mu)) \subseteq \Delta(\operatorname{spt}(\mu)).$ \label{sptdist}
+
+    \item If \( \mu_i \rightharpoonup \mu \) weakly as \( i \to \infty \), then \( \delta(\mu_i) \rightharpoonup \delta(\mu) \) weakly as \( i \to \infty \).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\hfill
+\begin{enumerate}
+
+\item For Borel \( B \subset \mathbb{R} \), we have
+$$
+\delta(\mu)(B) = (\mu \times \mu)\big( (|x - y|)^{-1}(B) \big),
+$$
+so by the change-of-variable formula
+\ref{lem:changeofvariable-pushforward},
+\[
+\int \varphi(r) \, d\delta(\mu)(r) = \iint \varphi(|x - y|) \, d\mu(x) \, d\mu(y),
+\]
+for every  \( \varphi \in C(\mathbb{R}) \).
+
+
+\item Suppose \( r \notin \Delta(\operatorname{spt} (\mu)) \). Then, for all \( x, y \in \operatorname{spt} \mu \), we have \( |x - y| \ne r \), hence there exists an open neighborhood \( U \subset \mathbb{R} \) of \( r \) such that \( |x - y| \notin U \) for all \( x, y \in \operatorname{spt} (\mu) \). Thus,
+\[
+\delta(\mu)(U) = \iint \chi_U(|x - y|) \, d\mu(x) d\mu(y) = 0.
+\]
+which implies that \( r \notin \operatorname{spt}(\delta(\mu)) \).
+
+\item If \( \mu_i \rightharpoonup \mu \) in \( \mathcal{M}(A) \), then \( \mu_i \times \mu_i \rightharpoonup \mu \times \mu \) in \( \mathcal{M}(A \times A) \), since the product of weak limits is weak limit of products for finite measures. Since the map \( (x, y) \mapsto |x - y| \) is continuous and bounded, the pushforward under this map is weakly continuous. Hence,
+\[
+\delta(\mu_i) = (|x - y|)_* (\mu_i \times \mu_i) \rightharpoonup (|x - y|)_* (\mu \times \mu) = \delta(\mu).
+\]
+\end{enumerate}
+\end{proof}
+
+\begin{theorem} [\textbf{Falconer 1986}] \label{FalconerThm}
+Let \( d \geq 2 \) and \( A \subset \mathbb{R}^d \) be a Borel set.
+\begin{itemize}
+  \item[(a)] If $ \dim_H(A) > \frac{d+1}{2}$, then \( \mathcal{L}^1(\Delta(A)) > 0. \) \vspace{0.1 cm}
+  \item[(b)] If \( \frac{d-1}{2} \leq \dim_H(A) \leq \frac{d+1}{2} \), then
+  $$  \dim_H(\Delta(A)) \geq \dim_H(A) - \frac{d - 1}{2}$$
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}
+\item[(a)] Let
+\[
+\sigma_r^{d-1} := \sigma^{d-1} \circ T_r^{-1}, \quad \text{where } T_r(x) = rx,
+\]
+so that \( \sigma_r^{d-1} \) is supported on the sphere \( \{ y \in \mathbb{R}^d : |y| = r \} \). By the change-of-variable formula \ref{lem:changeofvariable-pushforward}, it follows that
+\begin{equation} \label{eq:fourier-sphere-scaling}
+\widehat{\sigma_r^{d-1}}(x) = r^{d-1} \widehat{\sigma_1^{d-1}}(r x).
+\end{equation}
+Applying the decay estimate~\eqref{eq:sphere-decay} gives
+\begin{equation} \label{eq:sigma_r_decay}
+|\widehat{\sigma_r^{d-1}}(x)| \lesssim r^{(d-1)/2} |x|^{(1 - d)/2}, \quad \text{for all } x \in \mathbb{R}^d.
+\end{equation}
+
+Let \( f \in C_c^\infty(\mathbb{R}^d) \), and consider the measure \( \mu = f(x)\, dx \in \mathcal{M}(\mathbb{R}^d) \). Define the distance measure \( \delta(f) := \delta(\mu) \in \mathcal{M}(\mathbb{R}) \) by
+\[
+\delta(f)(B) := \iint \mathbf{1}_B(|x - y|)\, f(x) f(y)\, dx\, dy, \quad \text{for Borel sets } B \subset \mathbb{R}.
+\]
+Then \( \delta(f) \ll \mathcal{L}^1 \), and we denote its density (i.e., Radon–Nikodym derivative) also by \( \delta(f)(r) \), so that
+\[
+\int g(r)\, \delta(f)(r)\, dr = \iint g(|x - y|)\, f(x) f(y)\, dx\, dy, \quad \forall g \in C_c(\mathbb{R}).
+\]
+
+We now show that \( \delta(f)(r) \) admits the representation:
+\begin{equation} \label{eq:deltaf-convolution}
+\delta(f)(r) = \int_{\mathbb{R}^d} (\sigma_r^{d-1} * f)(x)\, f(x)\, dx.
+\end{equation}
+
+Let \( g \in C_c(\mathbb{R}) \). By Fubini’s theorem and the definition of convolution,
+\begin{align*}
+\int_{\mathbb{R}} g(r)\, \delta(f)(r)\, dr
+&= \iint f(x) f(y) g(|x - y|)\, dx\, dy \\
+&= \int f(x) \left( \int f(y)\, g(|x - y|)\, dy \right) dx.
+\end{align*}
+
+For fixed \( x \in \mathbb{R}^d \), let \( y = x + rz \) with \( z \in S^{d-1} \), \( r > 0 \), so
+\[
+\int f(y)\, g(|x - y|)\, dy = \int_0^\infty \int_{S^{d-1}} f(x + r\omega)\, g(r)\, r^{d-1} d\sigma^{d-1}(\omega)\, dr.
+\]
+Thus,
+\begin{align}
+\int_{\mathbb{R}} g(r)\, \delta(f)(r)\, dr
+&= \int f(x)\, \left( \int_0^\infty g(r)\, r^{d-1} \int_{S^{d-1}} f(x + r\omega)\, d\sigma^{d-1}(\omega) \, dr \right) dx
+\\
+&= \int_{\mathbb{R}} g(r) \left( \int f(x) (\sigma_r^{d-1} * f)(x)\, dx \right) dr,
+\notag
+\end{align}
+which shows that
+\[
+\delta(f)(r) = \int_{\mathbb{R}^d} (\sigma_r^{d-1} * f)(x)\, f(x)\, dx
+\]
+as the Radon–Nikodym derivative of \( \delta(f) \ll \mathcal{L}^1 \).
+
+
+Let \( \psi \) be a smooth function with compact support in \( \mathbb{R}^d \), \( \int \psi = 1 \),
+\[
+\psi_\varepsilon(x) = \varepsilon^{-d} \psi(x / \varepsilon), \quad \text{and} \quad \mu_\varepsilon = \psi_\varepsilon * \mu.
+\]
+Then \( \mu_\varepsilon \to \mu \) weakly as \( \varepsilon \to 0 \), whence \( \delta(\mu_\varepsilon) \to \delta(\mu) \) weakly. Moreover,
+\[
+\widehat{\mu_\varepsilon}(x) = \widehat{\psi}(\varepsilon x) \, \widehat{\mu}(x) \to \widehat{\mu}(x)
+\quad \text{for all } x \in \mathbb{R}^d.
+\]
+
+By \ref{eq:deltaf-convolution} and Parseval’s formula \ref{parseval},
+\begin{equation}
+\delta(\mu_\varepsilon)(r) = \int (\sigma_r^{d-1} * \mu_\varepsilon) \mu_\varepsilon
+= \int \widehat{\sigma_r^{d-1}} |\widehat{\mu_\varepsilon}|^2
+= \int \widehat{\sigma_r^{d-1}}(x) |\widehat{\psi}(\varepsilon x)|^2 |\widehat{\mu}(x)|^2 \, dx.
+\label{eq:4.9}
+\end{equation}
+
+Suppose now that, as in \eqref{eq:FourierRep_Energy},
+\[ \label{eq:delta-mu-eps}
+I_{(d+1)/2}(\mu) = \gamma\big(d, \tfrac{d+1}{2}\big) \int |x|^{(1-d)/2} |\widehat{\mu}(x)|^2 \, dx < \infty.
+\]
+
+Then, as \( \varepsilon \to 0 \), the right-hand side of \eqref{eq:4.9} converges to
+\[
+\int \widehat{\sigma_r^{d-1}}(x)\, |\widehat{\mu}(x)|^2 \, dx
+\]
+by the dominated convergence theorem, since
+\[
+|\widehat{\sigma_r^{d-1}}(x)| \cdot |\widehat{\psi}(\varepsilon x)|^2 \cdot |\widehat{\mu}(x)|^2
+\lesssim_r |x|^{(1-d)/2} |\widehat{\mu}(x)|^2,
+\]
+which is integrable by assumption.
+
+On the other hand, the left-hand side of \eqref{eq:4.9} converges weakly to \( \delta(\mu) \) as measures. Hence, if \( I_{(d+1)/2}(\mu) < \infty \), the distance measure \( \delta(\mu) \) is absolutely continuous with respect to Lebesgue measure, and is represented by the function
+\begin{equation}
+\delta(\mu)(r) = \int \widehat{\sigma_r^{d-1}}(x)\, |\widehat{\mu}(x)|^2 \, dx
+= r^{d-1} \int \widehat{\sigma_1^{d-1}}(r x)\, |\widehat{\mu}(x)|^2 \, dx. \label{eq:delta-mu-limit}
+\end{equation}
+Since \( \delta(\mu)(\mathbb{R}) = \mu(\mathbb{R}^d)^2 > 0 \), absolute continuity gives \( \mathcal{L}^1(\operatorname{spt}(\delta(\mu))) > 0 \). By lemma \ref{sptdist}, \( \operatorname{spt}(\delta(\mu)) \subseteq \Delta(A) \), so \( \mathcal{L}^1(\Delta(A)) > 0 \). Finally, by theorem \ref{thm2.8}, since \( \dim_H(A) > \frac{d+1}{2} \), some \( \mu \in \mathcal{M}(A) \) satisfies \( I_{(d+1)/2}(\mu) < \infty \), and the argument applies.
+
+\item[(b)] We need some estimate of the \( \delta(\mu) \) measure of the intervals \( [r, r + \eta] \). Let \( R > 0 \) be such that \( \operatorname{spt} \mu \subset B(0, R) \). Then, \( \operatorname{spt} \delta(\mu) \subset [0, 2R] \). Let \( 0 < \eta < r < 2R \). By the definition of \( \delta(\mu) \),
+\[
+\delta(\mu)([r, r + \eta]) = \int \mu(\{ y \in \mathbb{R}^n : r \leq |x - y| \leq r + \eta \}) \, d\mu(x)
+= \int (g_{r,\eta} * \mu)(x) \, d\mu(x),
+\]
+where \( g_{r,\eta} (x) = \chi_{\{ x \in \mathbb{R}^d : r \leq |x| \leq r + \eta \} } (x) \).
+
+As in part (a), let \[
+\psi_\varepsilon(x) = \varepsilon^{-d} \psi(x / \varepsilon), \quad \text{and} \quad \mu_\varepsilon = \psi_\varepsilon * \mu.
+\]
+By Parseval's formula \ref{parseval},
+\[
+\delta(\mu_\varepsilon)([r, r + \eta])
+= \int (g_{r,\eta} * \mu_\varepsilon)(x) \, d\mu_\varepsilon(x)
+= \int \widehat{g_{r,\eta}}(x) \, |\widehat{\mu_\varepsilon}(x)|^2 \, dx.
+\]
+
+Letting \( \varepsilon \to 0 \), we find that
+\begin{equation}
+\delta(\mu)([r, r + \eta]) = \int \widehat{g_{r,\eta}}(x) \, |\widehat{\mu}(x)|^2 \, dx.
+\label{formula}
+\end{equation}
+
+Since the right-hand side is continuous in \( r \) and \( \eta \), then formula \ref{formula} holds for all \( r \) and \( \eta \). Since \( g_{r,\eta} \) is radial, then by lemma \ref{lemma:bessel-fourier}
+\begin{align}
+\widehat{g_{r,\eta}}(x) &= c_d |x|^{-(d-2)/2} \int_r^{r+\eta} J_{(d-2)/2}(2\pi |x| s) s^{d/2} \, ds \notag \\
+&= c_d  |x|^{-d} \int_{r|x|}^{(r+\eta)|x|} J_{(d-2)/2}(2\pi u) u^{d/2} \, du.
+\end{align}
+
+By the decay estimate \eqref{eq:bessel-decay}, we have:
+$$ |\widehat{g_{r,\eta}}(x)| \lesssim |x|^{-d} \int_{r|x|}^{(r+\eta)|x|} u^{(d-1)/2} \, du $$
+
+Moreover, since \( 0 < \eta < r \), we have \( r + \eta \le 2r \), and hence
+\begin{equation} \label{eq:easy}
+((r + \eta)|x|)^{\frac{d-1}{2}} \le (2r |x|)^{\frac{d-1}{2}} \lesssim r^{\frac{d-1}{2}} |x|^{\frac{d-1}{2}}.
+\end{equation}
+
+Since the integrand \( u^{(d-1)/2} \) is increasing, we estimate
+\begin{equation} \label{eq:gr_eta_estimate_raw}
+\int_{r|x|}^{(r + \eta)|x|} u^{\frac{d-1}{2}} \, du
+\le \eta |x| \cdot ((r + \eta)|x|)^{\frac{d-1}{2}}
+\lesssim \eta |x| \cdot r^{\frac{d-1}{2}} \cdot |x|^{\frac{d-1}{2}}.
+\end{equation}
+
+Multiplying both sides by \( |x|^{-d} \) yields
+\begin{equation} \label{eq:gr_eta_estimate_1}
+|\widehat{g_{r,\eta}}(x)|
+\lesssim |x|^{-d} \int_{r|x|}^{(r + \eta)|x|} u^{(d-1)/2} \, du
+\lesssim \eta \cdot |x|^{-d} \cdot |x| \cdot r^{\frac{d-1}{2}} \cdot |x|^{\frac{d-1}{2}}
+= \eta \cdot |x|^{\frac{1 - d}{2}} \cdot r^{\frac{d-1}{2}}.
+\end{equation}
+
+
+For another estimate, use the following recursion formula for Bessel functions
+$$
+\frac{d}{ds} \left( s^m J_m(s) \right) = s^m J_{m-1}(s),
+\label{recurBessel}
+$$
+and the decay estimate \eqref{eq:bessel-decay} to get:
+\begin{align}
+|\widehat{g_{r,\eta}}(x)|
+&= \left| c_d (2\pi)^{-1} |x|^{-d} \int_{r|x|}^{(r+\eta)|x|} \frac{d}{du} \left( u^{d/2} J_{d/2}(2\pi u) \right) du \right| \notag \\
+&= |c_d (2\pi)^{-1} |x|^{-d}| \cdot \left| (r + \eta) |x|^{d/2} J_{d/2}(2\pi(r + \eta)|x|)
+- r |x|^{d/2} J_{d/2}(2\pi r |x|) \right| \notag \\
+&\lesssim r^{(d-1)/2} |x|^{-(d+1)/2}.
+\label{eq:gr_eta_estimate_2}
+\end{align}
+
+Combining estimates \eqref{eq:gr_eta_estimate_1} and \eqref{eq:gr_eta_estimate_2}, we write
+\begin{align*}
+\delta(\mu)([r, r + \eta])
+&= \int_{|x| \leq 1/\eta} |\widehat{g_{r,\eta}}(x)| \cdot |\widehat{\mu}(x)|^2 \, dx
++ \int_{|x| > 1/\eta} |\widehat{g_{r,\eta}}(x)| \cdot |\widehat{\mu}(x)|^2 \, dx \\
+&\lesssim r^{(d-1)/2} \eta \int_{|x| \leq 1/\eta} |x|^{(1-d)/2} |\widehat{\mu}(x)|^2 \, dx \\
+&\quad + r^{(d-1)/2} \int_{|x| > 1/\eta} |x|^{-(d+1)/2} |\widehat{\mu}(x)|^2 \, dx.
+\end{align*}
+
+Let \( 0 < t \leq 1 \). We give two estimates based on the size of \( |x| \).
+
+\begin{itemize}
+\item For \( |x| \le 1/\eta \), we use the estimate \eqref{eq:gr_eta_estimate_1} to get  \begin{equation}
+  \int_{|x| \le 1/\eta} |\widehat{g_{r,\eta}}(x)| \cdot |\widehat{\mu}(x)|^2 \, dx
+  \lesssim r^{(n-1)/2} \eta \int_{|x| \le 1/\eta} |x|^{(1-n)/2} |\widehat{\mu}(x)|^2 \, dx.
+  \label{eq:gr_eta_integral_small_x}
+  \end{equation}
+
+\item For \( |x| > 1/\eta \), use the estimate \eqref{eq:gr_eta_estimate_2} to get
+  \begin{equation}
+  \int_{|x| > 1/\eta} |\widehat{g_{r,\eta}}(x)| \cdot |\widehat{\mu}(x)|^2 \, dx
+  \lesssim r^{(n-1)/2} \int_{|x| > 1/\eta} |x|^{-(n+1)/2} |\widehat{\mu}(x)|^2 \, dx.
+  \label{eq:gr_eta_integral_large_x}
+  \end{equation}
+\end{itemize}
+
+Using formula \eqref{formula} and the estimates \eqref{eq:gr_eta_integral_small_x}  and  \eqref{eq:gr_eta_integral_large_x} for \( |\widehat{g_{r,\eta}}(x)| \), we have
+\begin{align}
+\delta(\mu)([r, r + \eta])
+&\lesssim r^{(d-1)/2} \eta^t \left(
+\int_{|x| \leq 1/\eta} |x|^{(1-d)/2 + t - 1} |\widehat{\mu}(x)|^2 \, dx
++ \int_{|x| > 1/\eta} |x|^{-(d+1)/2 + t} |\widehat{\mu}(x)|^2 \, dx \right) \notag \\
+&= r^{(d-1)/2} \eta^t \int_{\mathbb{R}^d} |x|^{-(d-1)/2 + t - 1} |\widehat{\mu}(x)|^2 \, dx \notag \\
+&= r^{(d-1)/2} \eta^t \cdot \frac{I_{\frac{d-1}{2} + t}(\mu)}{\gamma(d, \frac{d-1}{2} + t)} = I
+\end{align}
+
+By Theorem~\ref{eq:FourierRep_Energy},
+\begin{equation}
+I = r^{(d-1)/2} \eta^t \int_{\mathbb{R}^d} |\widehat{\mu}(x)|^2 |x|^{\frac{d-1}{2} + t - d} \, dx.
+\label{eq:delta_mu_as_integral}
+\end{equation}
+
+It follows that
+\[
+\delta(\mu)([r, r + \eta]) \lesssim \eta^t, \quad \text{for all } r \in (0, 2R).
+\]
+
+This is precisely the type of \textit{ball condition} needed to apply Frostman's Lemma:
+\[
+\delta(\mu)(B(r, \eta)) \lesssim \eta^t.
+\]
+
+\noindent
+Hence, Frostman's Lemma implies
+\[
+\mathcal{H}^t(\operatorname{spt}(\delta(\mu))) > 0.
+\]
+
+\noindent
+By lemma \ref{sptdist}, we conclude that
+\[
+\mathcal{H}^t(\Delta(A)) > 0.
+\]
+\end{itemize}
+\end{proof}
+
+\section{Falconer's Distance Conjecture with the Supremum Norm}
+It is natural to ask if replacing the Euclidean norm with another norm "solves" the the conjecture. There are many norms one could consider, such as the \( L^p \) norms for \( 1 \leq p < \infty \). In this section, we focus on the \( L^\infty \) norm on \( \mathbb{R}^d \):
+\[
+\|x - y\|_\infty = \max_{1 \leq i \leq d} |x_i - y_i|
+\]
+for $x = (x_1, \dots, x_d),\ y = (y_1, \dots, y_d) \in \mathbb{R}^d$.
+Accordingly, set
+\[
+\Delta'(A) := \left\{ \|x - y\|_\infty : x, y \in A \right\}.
+\]
+
+\begin{proposition}[\textbf{A Family of Counterexamples for the Supremum Norm}] \label{counterexSup}
+For every integer $m \geq 3$, there exists a compact set $E_m \subset \mathbb{R}^2$ such that
+\[
+\dim_H(E_m) = \frac{2(m-1)}{m} \quad \text{and} \quad \mathcal{L}^1(\Delta'(E_m)) = 0.
+\]
+In particular, $\sup_{m \geq 3} \dim_H(E_m) = 2$.
+\end{proposition}
+
+\begin{proof} Fix an integer $m \geq 3$. We adapt the construction in section 5.3 of~\cite{falconer1985geometry} to the parameter $m$.
+Let
+$$ A = \{ x= 0.a_1a_2a_3a_4\cdots \in [0,1] : a_{mi} = 0 \hspace{0.1 cm} \forall i \in \mathbb{N^*} \},$$
+
+and, for each $j \in \mathbb{N}^*$, let
+
+$$ A_j = \{ x= 0.a_1a_2a_3a_4\cdots \in [0,1] : a_{mi} = 0 \hspace{0.1 cm} \forall i = 1, \dots, j  \}.$$
+
+Then,
+\[
+A = \bigcap_{j=1}^\infty A_j.
+\]
+
+\noindent
+\textit{Step 1: Upper bound on $\dim_H(A)$.}
+Each element in \( A_j \) is determined by choosing $m-1$ digits freely for each of the \( j \) blocks, so there are $10^{(m-1)j}$ covering intervals of $A_j$, and each such interval has length $10^{-mj}$. Given any cover \( \{U_i\}_{i=1}^{\infty} \) of \( A_j \) with \( \operatorname{diam}(U_i) \leq 10^{-mj} \), note that
+\[
+\mathcal{H}^s_{10^{-mj}}(A_j) \leq 10^{(m-1)j} \cdot (10^{-mj})^s = 10^{(m-1)j - mjs}.
+\]
+
+Taking \( s = \frac{m-1}{m} \), we obtain
+\[
+\mathcal{H}^{(m-1)/m}_{10^{-mj}}(A_j) \leq 10^{(m-1)j - mj \cdot \frac{m-1}{m}} = 1, \qquad \forall j\in \mathbb{N^*}.
+\]
+
+By monotonicity of the $s$-dimensional Hausdorff content, since $A \subset A_j$ for each $j\in \mathbb{N^*}$, then $\mathcal{H}^{(m-1)/m}_{10^{-mj}}(A) \leq 1$, so as \( j \to \infty \), we get $ \mathcal{H}^{(m-1)/m}(A) \leq 1$, so
+\[
+\dim_H(A) \leq \frac{m-1}{m}.
+\]
+
+\noindent
+\textit{Step 2: Lower bound on $\dim_H(A)$.}
+For each \( j \in \mathbb{N}^*\), let \(\mu_j\) be the normalized restriction of Lebesgue measure to \(A_j\), so that \(\mu_j(A_j) = 1\). By theorem \ref{wsubseq}, there is a subsequence $ (\mu_{j_{k}})_{k=1}^{\infty} $ converging weakly to a measure \(\mu \in \mathcal{M}(A)\). If we show that \(\mu\) satisfies condition $(\star)$ of lemma \ref{eq:Frost} with \(s = \frac{m-1}{m}\), we can deduce  \(\dim_H(A) \geq \frac{m-1}{m}\).
+
+Given an interval \(I\) with \(\operatorname{diam}(I) < 1\), there is a unique \(j \in \mathbb{N^*} \) such that
+$$
+10^{-m(j+1)} \leq \operatorname{diam}(I) < 10^{-mj}.
+$$
+
+Since the subintervals covering \(A_j\) have length \(10^{-mj}\), the interval \(I\) can intersect at most one such subinterval. Hence, we obtain the Frostman-type bound
+\[
+\mu(I) \leq 10^{-(m-1)j} = \left(10^{-mj}\right)^{(m-1)/m} \leq (10 \cdot \operatorname{diam}(I))^{(m-1)/m}.
+\]
+so \(\dim_H(A) \geq \frac{m-1}{m}\), yielding the equality $\dim_H(A) = \frac{m-1}{m}$.
+
+\noindent
+\textit{Step 3: $\dim_H(E_m)$ and $\Delta'(E_m)$.}
+Let \( E_m = A \times A \). By proposition \hyperref[prop1.24]{3}, we have
+\[
+\dim_H(E_m) \geq \dim_H(A) + \dim_H(A) = \frac{2(m-1)}{m}.
+\]
+For the matching upper bound, note that $A \subset [0,1]$ has $\dim_H(A) = (m-1)/m$, so by countable stability and the product upper bound (Theorem 8.10 of \cite{mattila2012fourier}), $\dim_H(E_m) \leq 2 \dim_H(A) = 2(m-1)/m$. Hence $\dim_H(E_m) = 2(m-1)/m$.
+
+It is easy to check that
+\[
+\Delta'(E_m) = \Delta(A),
+\]
+since for $x, y \in A \times A$, $\|x-y\|_\infty = \max_i |x_i - y_i|$ is itself a value $|a-b|$ for some $a, b \in A$, and conversely any element of $\Delta(A)$ is achieved by varying only one coordinate.
+
+\noindent
+\textit{Step 4: $\dim_H(\Delta(A)) < 1$.}
+Recall that \( x \in A \) has the form
+\[
+x = 0.a_1 a_2 a_3 a_4\, \ldots, \text{\quad with } a_{mi} = 0 \hspace{0.1 cm} \forall i \in \mathbb{N}^*,
+\]
+hence any \( z \in \Delta(A) \) is of the form
+\[
+z=\pm 0.c_1 c_2 c_3 c_4 \ldots, \text{\quad where } c_{mi} \text{ results from $0-0$, so } c_{mi} \in \{0, 9\} \hspace{0.1cm} \forall i \in \mathbb{N}^*.
+\]
+
+Let \( D_j \) be the numbers of the form
+\[
+\pm 0.a_1 a_2 a_3 a_4 \ldots \quad \text{with } a_{mi} = 0 \text{ or } 9 \text{ for } i = 1, \ldots, j,
+\]
+so \( \Delta(A) = \bigcap_{j=1}^\infty D_j \). Observe that for any \( j \in \mathbb{N}^* \), we can cover \( D_j \) with \( 10^{(m-1)j} \cdot 2^{j+1} \) intervals of length \( 10^{-mj} \). Taking
+\begin{equation} \label{eq:sm}
+s_m := \frac{m-1 + \log_{10}(2)}{m},
+\end{equation}
+which satisfies $s_m < 1$ for all $m \geq 3$, we have
+\[
+\mathcal{H}^{s_m}_{10^{-mj}}(\Delta(A)) \leq 10^{-mj s_m} \cdot 10^{(m-1)j} \cdot 2^{j+1} = 2,
+\]
+since
+\[
+10^{-mj s_m} = 10^{-j(m - 1)} \cdot 10^{-j \log_{10}(2)} = 10^{-j(m - 1)} \cdot 2^{-j}.
+\]
+
+As \( j \to \infty \), we obtain $\dim_H(\Delta(A)) \leq s_m < 1$. In particular, for any $s > s_m$, $\mathcal{H}^s(\Delta(A)) = 0$; taking $s = 1$ gives $\mathcal{L}^1(\Delta(A)) = \mathcal{H}^1(\Delta(A)) = 0$. Thus, \( \mathcal{L}^1(\Delta'(E_m)) = \mathcal{L}^1(\Delta(A)) = 0 \).
+
+Finally, since $\dim_H(E_m) = 2(m-1)/m \to 2$ as $m \to \infty$, we get $\sup_{m \geq 3} \dim_H(E_m) = 2$.
+\end{proof}
+
+\begin{corollary}[\textbf{Counterexample for the Supremum Norm; Falconer}] \label{falconerSupCounter}
+There exists a Borel set \( E \subset \mathbb{R}^2 \) such that \( \dim_H(E) > 1 \) and \( \mathcal{L}^1(\Delta'(E)) = 0 \).
+\end{corollary}
+\begin{proof}
+Apply Proposition \ref{counterexSup} with $m = 4$ to obtain $E_4 \subset \mathbb{R}^2$ with $\dim_H(E_4) = 3/2 > 1$ and $\mathcal{L}^1(\Delta'(E_4)) = 0$. This recovers the original counterexample of Falconer (section 5.3 of \cite{falconer1985geometry}).
+\end{proof}
+
+\begin{remark}[\textbf{Sharpened Bound on $\dim_H(\Delta(A))$}]
+The proof of Proposition \ref{counterexSup} actually yields the explicit bound
+\[
+\dim_H(\Delta(A)) \leq s_m = \frac{m-1 + \log_{10}(2)}{m},
+\]
+where $s_m \to 1$ as $m \to \infty$. Combined with $\dim_H(E_m) = 2(m-1)/m \to 2$, this shows that the $L^\infty$ failure of Falconer's conjecture is not confined to a neighborhood of the threshold $d/2 = 1$: counterexamples persist with $\dim_H(E_m)$ arbitrarily close to the ambient dimension 2. The first few values are tabulated below.
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+$m$ & $\dim_H(A) = (m-1)/m$ & $\dim_H(E_m) = 2(m-1)/m$ & $s_m$ (upper bound on $\dim_H(\Delta(A))$) \\
+\midrule
+3 & $2/3 \approx 0.667$ & $4/3 \approx 1.333$ & $\approx 0.767$ \\
+4 & $3/4 = 0.750$ & $3/2 = 1.500$ & $\approx 0.825$ \\
+5 & $4/5 = 0.800$ & $8/5 = 1.600$ & $\approx 0.860$ \\
+10 & $9/10 = 0.900$ & $9/5 = 1.800$ & $\approx 0.930$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{remark}
+
+\begin{remark}[\textbf{The Base is Incidental}]
+The argument above uses base $10$, but this choice plays no essential role. For any integer base $b \geq 3$, replacing $10$ with $b$ throughout the construction yields a set $A^{(b)} \subset [0,1]$ with $\dim_H(A^{(b)}) = (m-1)/m$ and
+\[
+\dim_H(\Delta(A^{(b)})) \leq \frac{m-1 + \log_b(2)}{m} < 1,
+\]
+provided $m \geq 3$ (or $m \geq 2$ if $b \geq 3$ is large enough that $\log_b(2) < 1/m$, which is automatic once $b \geq 3$ and $m \geq 2$). The reason is that in base $b$, the digit subtraction $0 - 0$ (with or without borrow) produces a digit in $\{0, b-1\}$, so the set $D_j$ is covered by $b^{(m-1)j} \cdot 2^{j+1}$ intervals of length $b^{-mj}$, and the same counting argument applies.
+\end{remark}
+
+\begin{remark}[\textbf{Extension to $\mathbb{R}^d$}]
+The construction generalizes to arbitrary dimension $d \geq 2$. Setting $E_m^{(d)} := A^d \subset \mathbb{R}^d$, by induction on proposition \hyperref[prop1.24]{3} we have $\dim_H(E_m^{(d)}) \geq d \dim_H(A) = d(m-1)/m$. Moreover, $\Delta'(E_m^{(d)}) = \Delta(A)$ by the same argument as in Step 3 of the proof: for $x, y \in A^d$, $\|x-y\|_\infty = \max_i |x_i - y_i|$ is itself a value in $\Delta(A)$, and conversely any element of $\Delta(A)$ is achieved by varying only one coordinate. Hence
+\[
+\dim_H(E_m^{(d)}) \geq \frac{d(m-1)}{m}, \qquad \mathcal{L}^1(\Delta'(E_m^{(d)})) = 0,
+\]
+and as $m \to \infty$, $\dim_H(E_m^{(d)})$ approaches the ambient dimension $d$.
+\end{remark}
+
+\section{Recent Progress}
+
+Falconer’s distance conjecture remains open in all dimensions \( d \ge 2 \). Over the past decades, it has attracted significant attention due to its deep connections with harmonic analysis and additive combinatorics.
+
+As mentioned in theorem \ref{FalconerThm}, Falconer proved that \( \mathcal{L}^1(\Delta(E)) > 0 \) if \( \dim_H(E) > \frac{d}{2} + \frac{1}{2} \). This threshold was first improved by Bourgain \cite{bourgain1994distance}, and later by Wolff \cite{wolff1999decay} to \( \frac{4}{3} \) in dimension \( d = 2 \), using Fourier-analytic techniques. Erdoğan \cite{erdogan2005bilinear} subsequently lowered the threshold to \( \frac{d}{2} + \frac{1}{3} \) for all \( d \ge 3 \).
+
+The best known results as of 2021 are:
+\[
+\left\{
+\begin{array}{ll}
+\frac{5}{4}, & \text{if } d = 2 \hspace{0.17 cm} \text{(Guth–Iosevich–Ou–Wang, 2020 \cite{guth2020falconer})} \\
+\frac{9}{5}, & \text{if } d = 3 \hspace{0.17 cm} \text{(Du–Guth–Ou–Wang–Wilson–Zhang, 2021 \cite{du2021weighted})} \\
+\frac{d}{2} + \frac{1}{4} + \frac{1}{8d - 4}, & \text{if } d \ge 3 \hspace{0.17 cm} \text{(Du–Zhang, 2019 \cite{duzhang2019l2}) } \\
+\frac{d}{2} + \frac{1}{4}, & \text{if } d \ge 4 \text{ even} \hspace{0.17 cm} \text{(Du–Iosevich–Ou–Wang–Zhang, 2021, \cite{du2021even})}
+\end{array}
+\right.
+\]
+
+These bounds remain far from the conjectured threshold of \( d/2 \), but they reflect the strength of Fourier-analytic and geometric methods developed in recent years.
+
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+
+\end{document}
