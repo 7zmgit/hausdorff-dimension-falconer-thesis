@@ -4,7 +4,7 @@ My undergraduate thesis in mathematics at AUC, completed in Summer 2025 under th
 
 ## About
 
-This thesis is primarily expository. I wrote it to teach myself the geometric measure theory and harmonic analysis surrounding Falconer's distance conjecture. The conjecture states that for a Borel set $A \subset \mathbb{R}^d$ with $d \geq 2$, if $\dim_H(A) > d/2$, then the Euclidean distance set $\Delta(A) = \{\|x - y\| : x, y \in A\}$ has positive Lebesgue measure. It remains open in all dimensions.
+This thesis is primarily expository. I wrote it to teach myself the geometric measure theory and harmonic analysis surrounding Falconer's distance conjecture. The conjecture states that for a Borel set $A \subset \mathbb{R}^d$ with $d \geq 2$, if $\dim_H(A) > d/2$, then the Euclidean distance set $\Delta(A)$ -- the set of all distances $|x - y|$ for $x, y \in A$ -- has positive Lebesgue measure. It remains open in all dimensions.
 
 The thesis builds up the necessary machinery from the ground up:
 
