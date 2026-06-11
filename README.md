@@ -1,10 +1,10 @@
 # On the Hausdorff Dimension and Falconer's Distance Conjecture
 
-My undergraduate thesis in mathematics at AUC, completed in Summer 2025 under the supervision of Dr. Eslam Badr in partial fulfillment of the BSc in Mathematics.
+My Mathematics undergraduate thesis at AUC, completed in Summer 2025, under the supervision of Dr. Eslam Badr.
 
 ## About
 
-This thesis is primarily expository. I wrote it to teach myself the geometric measure theory and harmonic analysis surrounding Falconer's distance conjecture. The conjecture states that for a Borel set $A \subset \mathbb{R}^d$ with $d \geq 2$, if $\dim_H(A) > d/2$, then the Euclidean distance set $\Delta(A)$, which is the set of all distances $|x - y|$ for $x, y \in A$, has positive Lebesgue measure. It remains open in all dimensions.
+This thesis is primarily expository. I wrote it to teach myself the geometric measure theory and harmonic analysis surrounding Falconer's distance conjecture. The conjecture says: for a Borel set $A \subset \mathbb{R}^d$ with $d \geq 2$, if $\dim_H(A) > d/2$, then the Euclidean distance set $\Delta(A)$, which is the set of all distances $|x - y|$ for $x, y \in A$, has positive Lebesgue measure. It remains open in all dimensions.
 
 The thesis builds up the necessary machinery from the ground up:
 
